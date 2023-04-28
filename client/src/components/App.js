@@ -4,6 +4,7 @@ import SignUp from "./SignUp";
 import Login from "./Login";
 import NavBar from "./NavBar";
 import Home from "./Home";
+import BooksContainer from "./BooksContainer";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -22,8 +23,11 @@ function App() {
       <main>
         {user ? (
           <Switch>
-            <Route path="/">
+            <Route exact path="/">
               <Home user={user}/>
+            </Route>
+            <Route path="/books">
+              <BooksContainer />
             </Route>
           </Switch>
         ) : (
