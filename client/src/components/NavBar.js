@@ -18,7 +18,7 @@ function NavBar({ user, setUser }) {
       <div>
         {user ? (
             <>
-                <Link to="/books">Books</Link>
+                <Link to="/profile">Profile</Link>
                 <button onClick={handleLogoutClick}>Logout</button>
             </>
         ) : (

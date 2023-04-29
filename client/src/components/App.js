@@ -5,11 +5,14 @@ import Login from "./Login";
 import NavBar from "./NavBar";
 import Home from "./Home";
 import BooksContainer from "./BooksContainer";
+import Book from "./Book";
+import Profile from "./Profile";
 
 function App() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
+    // auto-login
     fetch("/me").then((r) => {
       if (r.ok) {
         r.json().then((user) => setUser(user));
@@ -23,11 +26,17 @@ function App() {
       <main>
         {user ? (
           <Switch>
+            <Route path="/profile">
+              <Profile user={user}/>
+            </Route>
+            <Route path="/books/:id">
+              <Book/>
+            </Route>
+            <Route exact path="/books">
+              <BooksContainer/>
+            </Route>
             <Route exact path="/">
               <Home user={user}/>
-            </Route>
-            <Route path="/books">
-              <BooksContainer />
             </Route>
           </Switch>
         ) : (

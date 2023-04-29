@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
     rescue_from ActiveRecord::RecordInvalid, with: :user_data_invalid
     rescue_from ActiveRecord::RecordNotFound, with: :user_unauthorized
-    
+
     def create
         new_user = User.create!(user_params)
         session[:user_id] ||= new_user.id
@@ -13,9 +13,9 @@ class UsersController < ApplicationController
     end
 
     private
-    
+
     def user_params
-        params.permit(:name, :username, :password, :password_confirmation)
+        params.permit(:username, :password, :password_confirmation, :user)
     end
 
     def user_data_invalid(error_hash)
