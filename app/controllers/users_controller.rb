@@ -15,7 +15,7 @@ class UsersController < ApplicationController
     private
 
     def user_params
-        params.permit(:username, :password, :password_confirmation, :user)
+        params.permit(:name, :age, :profile_picture, :username, :password, :password_confirmation, :user)
     end
 
     def user_data_invalid(error_hash)

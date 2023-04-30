@@ -14,19 +14,26 @@ function NavBar() {
 
     return (
         <header>
-        <div>
-            <Link to="/">Home</Link>
-        </div>
-        <div>
+            {user ? (
+                <>
+                    <div className="navbar">
+                        <Link to="/">Home</Link>
+                    </div>
+                </> 
+            ): 
+            <h3 className="navbar logo">BookClub</h3>
+            }
+
+        <div className="navbar">
             {user ? (
                 <>
                     <Link to="/profile">Profile</Link>
-                    <button onClick={handleLogoutClick}>Logout</button>
+                    <button className="logout" onClick={handleLogoutClick}>Logout</button>
                 </>
             ) : (
             <>
                 <Link to="/signup">Signup</Link>
-                <Link to="/login">Login</Link>
+                <Link className="logout" to="/login">Login</Link>
             </>
             )}
         </div>

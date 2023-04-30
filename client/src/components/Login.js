@@ -1,12 +1,24 @@
 import React, { useContext, useState } from "react";
 import { UserContext } from "../Context/UserContext";
 import { useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function Login() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
   const history = useHistory();
   const {setUser} = useContext(UserContext)
+
+  const initialState = {
+    username: "",
+    password: "",
+  }
+  const [formData, setFormData] = useState(initialState)
+  
+  function handleChange(event) {
+      setFormData({
+        ...formData,
+        [event.target.name]: event.target.value
+      });
+    }
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -15,7 +27,7 @@ function Login() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ username, password }),
+      body: JSON.stringify(formData),
     }).then((r) => {
       if (r.ok) {
         r.json().then((user) => setUser(user));
@@ -27,24 +39,28 @@ function Login() {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <h1>Login</h1>
-        <label htmlFor="username">Username</label>
+        <h1 className="form-text head">Login</h1>
+        <h3 className="form-text subhead">Enter your details to sign in to your account.</h3>
         <input
           type="text"
           id="username"
           autoComplete="off"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          name="username"
+          placeholder="username"
+          value={formData.username}
+          onChange={handleChange}
         />
-        <label htmlFor="password">Password</label>
         <input
           type="password"
           id="password"
+          name="password"
+          placeholder="password"
           autoComplete="current-password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          value={formData.password}
+          onChange={handleChange}
         />
-        <button type="submit">Login</button>
+        <button className="form-button" type="submit">Login</button>
+        <h5 className="form-text">Don't have an account?<br></br><Link className="link" to="/signup">Sign up now.</Link></h5>
       </form>
     </div>
   );

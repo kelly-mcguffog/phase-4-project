@@ -1,6 +1,7 @@
 import React, {useContext} from "react";
 import { UserContext } from "../Context/UserContext";
 import BooksContainer from "./BooksContainer";
+import Login from "./Login";
 
 function Home() {
     const {user} = useContext(UserContext)
@@ -12,7 +13,9 @@ function Home() {
         </>
       )
     } else {
-      return <h1>Please Login or Sign Up</h1>;
+      return (
+        <Login/>
+      )
     }
   }
   

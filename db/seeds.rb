@@ -117,7 +117,7 @@ thriller4 = Book.create(
 thriller5 = Book.create(
     title: "Verity",
     genre: "Thriller",
-    author: "Laura Dave",
+    author: "Colleen Hoover",
     summary: "Lowen Ashleigh is a struggling writer on the brink of financial ruin when she accepts the job offer of a lifetime. Jeremy Crawford, husband of bestselling author Verity Crawford, has hired Lowen to complete the remaining books in a successful series his injured wife is unable to finish.",
     book_image: "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1634158558i/59344312.jpg",
     page_count: 336
