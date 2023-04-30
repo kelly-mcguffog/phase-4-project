@@ -1,6 +1,9 @@
+import React, {useContext} from "react";
+import { UserContext } from "../Context/UserContext";
 import BooksContainer from "./BooksContainer";
 
-function Home({ user }) {
+function Home() {
+    const {user} = useContext(UserContext)
     if (user) {
       return(
         <>

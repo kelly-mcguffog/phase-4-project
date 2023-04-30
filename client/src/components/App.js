@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { Switch, Route } from "react-router-dom";
+import { UserContext } from "../Context/UserContext";
+import { BookProvider } from "../Context/BookContext";
 import SignUp from "./SignUp";
 import Login from "./Login";
 import NavBar from "./NavBar";
@@ -7,52 +9,50 @@ import Home from "./Home";
 import BooksContainer from "./BooksContainer";
 import Book from "./Book";
 import Profile from "./Profile";
+// import { ReviewProvider } from "../Context/ReviewContext";
+
 
 function App() {
-  const [user, setUser] = useState(null);
-
-  useEffect(() => {
-    // auto-login
-    fetch("/me").then((r) => {
-      if (r.ok) {
-        r.json().then((user) => setUser(user));
-      }
-    });
-  }, []);
+  
+  const {user} = useContext(UserContext)
 
   return (
     <>
-      <NavBar user={user} setUser={setUser} />
-      <main>
-        {user ? (
-          <Switch>
-            <Route path="/profile">
-              <Profile user={user}/>
-            </Route>
-            <Route path="/books/:id">
-              <Book/>
-            </Route>
-            <Route exact path="/books">
-              <BooksContainer/>
-            </Route>
-            <Route exact path="/">
-              <Home user={user}/>
-            </Route>
-          </Switch>
-        ) : (
-          <Switch>
-            <Route path="/signup">
-              <SignUp setUser={setUser} />
-            </Route>
-            <Route path="/login">
-              <Login setUser={setUser} />
-            </Route>
-            <Route path="/">
-              <Home />
-            </Route>
-          </Switch>
-        )}
-      </main>
+        <NavBar />
+        <main>
+          {user ? (
+            <BookProvider>
+            <Switch>
+              <Route path="/profile">
+                <Profile />
+              </Route>
+              {/* <ReviewProvider> */}
+                <Route path="/books/:id">
+                  <Book/>
+                </Route>
+              {/* </ReviewProvider> */}
+              <Route exact path="/books">
+                  <BooksContainer/>
+              </Route>
+              <Route exact path="/">
+                <Home />
+              </Route>
+            </Switch>
+            </BookProvider>
+          ) : (
+            <Switch>
+              <Route path="/signup">
+                <SignUp />
+              </Route>
+              <Route path="/login">
+                <Login />
+              </Route>
+              <Route path="/">
+                <Home />
+              </Route>
+            </Switch>
+          )}
+        </main>
     </>
   );
 }

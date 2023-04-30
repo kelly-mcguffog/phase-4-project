@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import Reviews from "./Reviews";
+import { ReviewProvider } from "../Context/ReviewContext";
+
 
 const initialState = {
   book: null,
@@ -50,6 +53,9 @@ function Book() {
         </p>
       </small>
       <p>{summary}</p>
+      <ReviewProvider>
+        <Reviews book={book}/>
+      </ReviewProvider>
     </article>
   );
 }

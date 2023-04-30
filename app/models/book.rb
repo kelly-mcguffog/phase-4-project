@@ -4,7 +4,7 @@ class Book < ApplicationRecord
     validates :title, :author, presence: true
     validates :page_count, numericality: true
 
-    GENRE = ['Action & Adventure', 'Mystery', 'Thriller', 'Historical Fiction', 'Horror', 'Romance', 'Short Story', 'Memoir & Autobiography', 'Children']
+    GENRE = ['Action & Adventure', 'Mystery', 'Thriller', 'Historical Fiction', 'Horror', 'Romance', 'Short Story', 'Memoir', 'Children']
 
     validates :genre, inclusion: {
     in: GENRE,

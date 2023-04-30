@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { UserContext } from "../Context/UserContext";
 import { useHistory } from "react-router-dom";
 
-function Login({ setUser }) {
+function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const history = useHistory();
+  const {setUser} = useContext(UserContext)
 
   function handleSubmit(e) {
     e.preventDefault();

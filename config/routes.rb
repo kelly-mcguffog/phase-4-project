@@ -4,5 +4,15 @@ Rails.application.routes.draw do
   get '/me', to: 'users#show'
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
-  resources :books
+  get '/books', to: 'books#index' 
+  get '/books/:id', to: 'books#show'
+  post '/books/:id/reviews', to: 'reviews#create'
+  get '/reviews', to: 'reviews#index'
+
+
+
+  # resources :books, only: [:index, :show, :create, :update, :destroy]
+  # get '/reviews', to: 'reviews#index'
+  # get '/reviews/:id', to: 'reviews#show'
+  
 end
