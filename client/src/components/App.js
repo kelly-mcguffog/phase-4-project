@@ -9,12 +9,18 @@ import Home from "./Home";
 import BooksContainer from "./BooksContainer";
 import Book from "./Book";
 import Profile from "./Profile";
+import EditReview from "./EditReview";
 // import { ReviewProvider } from "../Context/ReviewContext";
 
 
 function App() {
   
   const {user} = useContext(UserContext)
+
+    //   function handleEditReviews(id){
+    //     const selectedReview = reviews.find(review => review.id === id)
+    //     console.log(selectedReview)
+    // }
 
   return (
     <>
@@ -26,11 +32,12 @@ function App() {
               <Route path="/profile">
                 <Profile />
               </Route>
-              {/* <ReviewProvider> */}
+              <Route path="/reviews/:id">
+                  <EditReview />
+                </Route>
                 <Route path="/books/:id">
                   <Book/>
                 </Route>
-              {/* </ReviewProvider> */}
               <Route exact path="/books">
                   <BooksContainer/>
               </Route>

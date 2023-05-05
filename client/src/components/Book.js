@@ -39,23 +39,30 @@ function Book() {
     }
   }
 
-  const { title, author, genre, summary, page_count } = book;
+  const { title, author, genre, summary, page_count, book_image } = book;
 
   return (
     <article>
-      <h1>{title}</h1>
-      <small>
-        <p>
-          {genre} • {page_count} pages
-        </p>
-        <p>
-          <em>Written by {author}</em>
-        </p>
-      </small>
-      <p>{summary}</p>
-      <ReviewProvider>
-        <Reviews book={book}/>
-      </ReviewProvider>
+        <div className="details">
+            <img className="details-image" src={book_image}></img>
+            <div className="details-text">
+                <h1>{title}</h1>
+                <small>
+                    <p>
+                    {genre} • {page_count} pages
+                    </p>
+                    <p>
+                    <em>Written by {author}</em>
+                    </p>
+                </small>
+                <p>{summary}</p>
+            </div>
+        </div>
+        <div id="review-section">
+            <ReviewProvider>
+                <Reviews book={book}/>
+            </ReviewProvider>
+        </div>
     </article>
   );
 }
