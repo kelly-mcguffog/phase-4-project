@@ -10,6 +10,7 @@ import BooksContainer from "./BooksContainer";
 import Book from "./Book";
 import Profile from "./Profile";
 import EditReview from "./EditReview";
+import AddBookForm from "./AddBookForm";
 // import { ReviewProvider } from "../Context/ReviewContext";
 
 
@@ -38,6 +39,9 @@ function App() {
                 <Route path="/books/:id">
                   <Book/>
                 </Route>
+                <Route path="/books">
+                  <AddBookForm/>
+              </Route>
               <Route exact path="/books">
                   <BooksContainer/>
               </Route>

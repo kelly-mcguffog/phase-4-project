@@ -24,8 +24,8 @@ function Review({review, deleteReview, users}) {
                 if(u.id === user_id)
                     return u.name
             })}</h5>
-            <button onClick={handleDeleteReview}>Delete</button>
-            <Link to={`/books/${book_id}/reviews/${id}`}>Edit</Link>
+            <button className="form-button" onClick={handleDeleteReview}>Delete</button>
+            <Link className="form-button" to={`/books/${book_id}/reviews/${id}`}>Edit</Link>
         </div>
     )
 }

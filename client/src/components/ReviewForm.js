@@ -3,7 +3,7 @@ import { UserContext } from "../Context/UserContext";
 import { useParams} from "react-router-dom";
 import StarRating from "./StarRating";
 
-function ReviewForm({onAddReview}) {
+function ReviewForm({totalReviews, averageRating, onAddReview}) {
     const {id} = useParams()
     const {user} = useContext(UserContext)
     const [comment, setComment] = useState("");
@@ -28,21 +28,23 @@ function ReviewForm({onAddReview}) {
       }
       return (
             <div>
-              <form onSubmit={handleSubmit}>
-                <h1>Reviews</h1>
-                <label htmlFor="comment">Comment</label>
-                <textarea
-                  type="text"
-                  id="comment"
-                  autoComplete="off"
-                  name="comment"
-                  value={comment}
-                  onChange={(e) => setComment(e.target.value)}
-                />
-                <label htmlFor="rating">Rating</label>
-                <StarRating rating={rating} setRating={setRating} />
-                <button name="submit" type="submit">Submit</button>
-              </form>
+                <form className="review-form" onSubmit={handleSubmit}>
+                    <h1>Reviews</h1>
+                    <small>
+                        <p>{totalReviews} reviews • {averageRating} rating</p>
+                    </small>
+                    <textarea
+                    type="text"
+                    id="comment"
+                    autoComplete="off"
+                    name="comment"
+                    value={comment}
+                    placeholder="Leave a review"
+                    onChange={(e) => setComment(e.target.value)}
+                    />
+                    <StarRating rating={rating} setRating={setRating} />
+                    <button className="form-button" name="submit" type="submit">Submit</button>
+                </form>
             </div>
           );
 

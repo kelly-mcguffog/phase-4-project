@@ -9,9 +9,10 @@ function ReviewContainer({book}) {
     const {setReviews} = useContext(ReviewContext)
 
 
-      const ratings = reviews.map((ratings) => ratings.rating)
-      const averageRating = ratings.reduce((a, b) => a + b, 0) / ratings.length;
-
+    const ratings = reviews.map((ratings) => ratings.rating)
+    const averageRating = ratings.reduce((a, b) => a + b, 0) / ratings.length;
+    const totalReviews = book.reviews.length
+    
     function onAddReview(newReview) {
         setReviews([...reviews, newReview]);
     }
@@ -22,14 +23,9 @@ function ReviewContainer({book}) {
     }
 
 
-
     return(
         <div>
-            <h1>Reviews</h1>
-            <small>
-                <p>{book.reviews.length} reviews • {averageRating} rating</p>
-            </small>
-            <ReviewForm onAddReview={onAddReview}/>
+            <ReviewForm totalReviews={totalReviews} averageRating={averageRating} onAddReview={onAddReview}/>
             {book.reviews.map(review => (
                 <Review key={review.id} review={review} deleteReview={deleteReview} users={users}/>
             ))}

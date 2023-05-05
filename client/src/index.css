@@ -104,13 +104,13 @@ main {
   outline: none;
   cursor: pointer;
 }
-
 .on{
   color: #000;
 }
 
 .off{
   color: #ccc;
+  
 }
 
 form {
@@ -135,7 +135,7 @@ form {
 .link{
   color:#013220;
 }
-form input {
+form input, textarea {
   margin: 0.5rem 0;
   background-color: #fff8e7;
   border: 0.5px solid #013220;
@@ -150,17 +150,72 @@ label{
   text-align: center;
 }
 
-button.form-button{
+button.form-button, a.form-button{
   background-color: #013220;
   color: #fff8e7;
   padding: 10px;
   margin-top: 10px;
   border-radius: 5px;
   border: none;
+  font-size: 14px;
+}
+
+a.form-button{
+  text-decoration: none;
+  padding: 10px 20px;
+  margin-left: 10px;
 }
 
 .review{
   background-color: #f9e8c7;
   padding: 20px;
   margin: 20px 0px;
+}
+.circular--landscape{
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
+  border-radius: 5%;
+  /* margin: auto; */
+}
+.profile-image{
+  width: 200%;
+  margin-left: -60px;
+}
+.profile{
+  /* width: 80%; */
+  background-color: #f9e8c7;
+  display: flex;
+  width: 400px;
+  margin: 5rem 0rem;
+  padding: 50px 100px;
+}
+.profile-info{
+  width: 100%;
+  margin-left: 20px;
+}
+.review-form{
+  width: 80%;
+  margin: 20px 0px;
+  padding: 5% 10%;
+}
+.star{
+  font-size: 20px;
+}
+input[type="text"], textarea, ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+  font-family: Arial, Helvetica, sans-serif;
+}
+h1{
+  margin: 10px 0px;
+}
+p{
+  margin-top: 0px;
 }

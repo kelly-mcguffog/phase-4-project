@@ -27,6 +27,7 @@ function NavBar() {
         <div className="navbar">
             {user ? (
                 <>
+                    <Link to="/books">Add Book</Link>
                     <Link to="/profile">Profile</Link>
                     <button className="logout" onClick={handleLogoutClick}>Logout</button>
                 </>

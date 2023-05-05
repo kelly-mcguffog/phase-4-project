@@ -2,11 +2,12 @@ import React, { useState, useContext } from "react";
 import { UserContext } from "../Context/UserContext";
 import { useParams} from "react-router-dom";
 // import { ReviewContext } from "../Context/ReviewContext";
-import EditStarRating from "./EditStarRating";
+// import EditStarRating from "./EditStarRating";
 
 function EditReview() {
     const {book_id, id} = useParams();
     const {user} = useContext(UserContext)
+    const [hover, setHover] = useState(0)
 
     const initialState = user.reviews.find(r => r.id == id)
     const [formData, setFormData] = useState(initialState)
@@ -14,6 +15,7 @@ function EditReview() {
     
     const handleChangeInput = (e) => {
         setFormData(editFormData => {
+            console.log(editFormData)
            return({ 
                 ...editFormData,
                 [e.target.name]: e.target.value
@@ -37,8 +39,7 @@ function EditReview() {
       return (
             <div>
               <form onSubmit={handleEditSubmit}>
-                <h1>Reviews</h1>
-                <label htmlFor="comment">Comment</label>
+                <h1>Edit Review</h1>
                 <textarea
                   type="text"
                   id="comment"
@@ -47,9 +48,26 @@ function EditReview() {
                   value={comment}
                   onChange={handleChangeInput}
                 />
-                <label htmlFor="rating">Rating</label>
-                <EditStarRating handleChangeInput={handleChangeInput} rating={rating}/>
-                <button name="submit" type="submit">Submit</button>
+                <div className="star-rating">
+                    {[...Array(5)].map((star, index) => {
+                        index += 1;
+                        return(
+                            <button
+                            type="button"
+                            key={index}
+                            name="rating"
+                            value={index}
+                            className={index <= (( hover) || rating) ? "on" : "off"}
+                            onClick={(handleChangeInput)}
+                            onMouseEnter={() => setHover(index)}
+                            onMouseLeave={() => setHover(rating)}
+                            >
+                                <span className="star">&#9733;</span>
+                            </button>
+                        );
+                    })}
+                </div>
+                <button className="form-button" name="submit" type="submit">Submit</button>
               </form>
             </div>
           );

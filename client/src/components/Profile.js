@@ -5,13 +5,18 @@ function Profile() {
     const {user} = useContext(UserContext)
 
     return(
-        <>
-            <img src={user.profile_picture}></img>
-            <h1>{user.name}!</h1>
-            <h2>{user.username}</h2>
-            <h2>{user.age}</h2>
-            <button>Edit Information</button>
-        </>
+        <div className="profile">
+            <div className="circular--landscape"> 
+                <img className="profile-image" src={user.profile_picture}></img>
+            </div>
+            <div className="profile-info">
+                <h1>My Profile</h1>
+                <small>Name: {user.name}</small><br></br>
+                <small>Username: {user.username}</small><br></br>
+                <small>Age: {user.age} years old</small><br></br>
+                <button className="form-button">Edit Information</button>
+            </div>
+        </div>
     )
 }
 
