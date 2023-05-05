@@ -5,10 +5,11 @@ import Login from "./Login";
 
 function Home() {
     const {user} = useContext(UserContext)
+
     if (user) {
       return(
         <>
-            <h1>Welcome, {user.username}!</h1>
+            <h1 className="welcome-text">Welcome, {user.username}!</h1>
             <BooksContainer/>
         </>
       )

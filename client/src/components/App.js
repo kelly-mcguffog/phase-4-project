@@ -18,14 +18,10 @@ function App() {
   
   const {user} = useContext(UserContext)
 
-    //   function handleEditReviews(id){
-    //     const selectedReview = reviews.find(review => review.id === id)
-    //     console.log(selectedReview)
-    // }
 
   return (
     <>
-        <NavBar />
+        <NavBar/>
         <main>
           {user ? (
             <BookProvider>
