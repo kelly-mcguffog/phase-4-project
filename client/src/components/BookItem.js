@@ -19,7 +19,7 @@ function BookItem({book, isOn, deleteBook}) {
                 <h5 className="author"><em>{author}</em></h5>
             </Link>
             <div className={isOn ? "editMode" : "normalMode"}>
-                <Link to={`/books/${id}/edit`}>Edit</Link>
+                <Link to={`/books/${id}/edit`}><i className="fa-solid fa-pen-to-square"></i></Link>
                 <button onClick={handleDeleteBook}>Delete</button>
             </div>
         </div>
