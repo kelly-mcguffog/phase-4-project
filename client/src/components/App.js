@@ -11,6 +11,7 @@ import Book from "./Book";
 import Profile from "./Profile";
 import EditReview from "./EditReview";
 import AddBookForm from "./AddBookForm";
+import EditBookForm from "./EditBookForm";
 // import { ReviewProvider } from "../Context/ReviewContext";
 
 
@@ -29,13 +30,16 @@ function App() {
               <Route path="/profile">
                 <Profile />
               </Route>
-              <Route path="/books/:book_id/reviews/:id">
+              <Route path="/books/:book_id/reviews/:id/edit">
                   <EditReview />
                 </Route>
-                <Route path="/books/:id">
+                <Route exact path="/books/:id/edit">
+                  <EditBookForm />
+                </Route>
+                <Route exact path="/books/:id">
                   <Book/>
                 </Route>
-                <Route path="/books">
+                <Route path="/books/new">
                   <AddBookForm/>
               </Route>
               <Route exact path="/books">
