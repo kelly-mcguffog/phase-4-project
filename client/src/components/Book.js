@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import Reviews from "./Reviews";
 import { ReviewProvider } from "../Context/ReviewContext";
+import ReviewContainer from "./ReviewContainer";
 
 
 const initialState = {
@@ -60,7 +60,7 @@ function Book() {
         </div>
         <div id="review-section">
             <ReviewProvider>
-                <Reviews book={book}/>
+                <ReviewContainer book={book}/>
             </ReviewProvider>
         </div>
     </article>

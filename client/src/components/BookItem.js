@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 function BookItem({book}) {
-    const {id, title, genre, author, summary, book_image, page_count} = book
+    const {id, title, author, book_image} = book
     return(
         <div className="books">
             <Link className="text" to={`/books/${id}`}>

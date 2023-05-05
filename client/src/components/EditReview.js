@@ -5,7 +5,7 @@ import { useParams} from "react-router-dom";
 import EditStarRating from "./EditStarRating";
 
 function EditReview() {
-    const {id} = useParams();
+    const {book_id, id} = useParams();
     const {user} = useContext(UserContext)
 
     const initialState = user.reviews.find(r => r.id == id)
@@ -24,7 +24,7 @@ function EditReview() {
 
     function handleEditSubmit(e) {
         e.preventDefault();
-        fetch(`/reviews/${id}`, {
+        fetch(`/books/${book_id}/reviews/${id}`, {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
@@ -32,7 +32,7 @@ function EditReview() {
           body: JSON.stringify(formData),
         })
           .then((r) => r.json())
-          .then((updatedReview) => console.log(updatedReview));
+          .then((updatedReview) => setFormData(updatedReview));
       }
       return (
             <div>

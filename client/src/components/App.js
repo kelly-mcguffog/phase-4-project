@@ -32,7 +32,7 @@ function App() {
               <Route path="/profile">
                 <Profile />
               </Route>
-              <Route path="/reviews/:id">
+              <Route path="/books/:book_id/reviews/:id">
                   <EditReview />
                 </Route>
                 <Route path="/books/:id">
