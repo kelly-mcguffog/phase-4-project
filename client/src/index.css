@@ -69,6 +69,7 @@ header button {
 .books{
   width: 150px;
   margin: 20px;
+  margin-bottom: 40px;
   text-align: center;
   cursor: pointer;
   transition: 0.3s;
@@ -291,7 +292,30 @@ input:checked + .slider:before {
 }
 .editMode{
   display: block;
+  /* margin: 10px 0px; */
 }
 .normalMode{
   display: none;
+}
+
+.icon{
+  height: 20px;
+  width: auto;
+}
+
+.delete{
+  height: 23px;
+  width: auto;
+  float: right;
+}
+.edit{
+  float: left;
+}
+
+.delete-book{
+  background-color: transparent;
+  border: none;
+  float: right;
+  padding: 0;
+  margin-bottom: 10px;
 }

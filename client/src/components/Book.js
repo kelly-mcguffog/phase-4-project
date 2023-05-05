@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { ReviewProvider } from "../Context/ReviewContext";
 import ReviewContainer from "./ReviewContainer";
-
 
 const initialState = {
   book: null,
@@ -56,6 +55,10 @@ function Book() {
                     </p>
                 </small>
                 <p>{summary}</p>
+                <div>
+                  <Link to={`/books/${id}/edit`}><img className="edit icon" src="https://cdn.onlinewebfonts.com/svg/img_420068.png"/></Link>
+                  {/* <button className="delete-book" onClick={handleDeleteBook}><img className="delete icon" src="https://cdn4.iconfinder.com/data/icons/hodgepodge-vol-1/32/circle_x_delete_cross-512.png"/></button> */}
+                </div>
             </div>
         </div>
         <div id="review-section">
