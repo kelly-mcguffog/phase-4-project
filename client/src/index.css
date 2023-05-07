@@ -321,6 +321,7 @@ input:checked + .slider:before {
   float: right;
   padding: 0;
   margin-bottom: 10px;
+  cursor: pointer;
 }
 
 .edit-form{

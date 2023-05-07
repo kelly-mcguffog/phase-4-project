@@ -7,7 +7,6 @@ import Login from "./Login";
 import Signup from "./Signup";
 import NavBar from "./NavBar";
 import Home from "./Home";
-import BooksContainer from "./BooksContainer";
 import Book from "./Book";
 import Profile from "./Profile";
 import EditReview from "./EditReview";
@@ -50,7 +49,6 @@ function App() {
 }
 
 const onUpdateReview = (updatedReview) => {
-
   const updatedList = reviews.map(review => {
       if(review.id === updatedReview.id){
           return updatedReview
@@ -71,6 +69,23 @@ const onUpdateReview = (updatedReview) => {
   setBooks(updatedBooks)
 }
 
+const onUpdateBook = (updatedBook) => {
+  const updatedList = books.map(book => {
+      if(book.id === updatedBook.id){
+          return updatedBook
+      } else {
+          return book
+      }
+  })
+  setBooks(updatedList)
+}
+
+const onDeleteBook = (selectedBook) => {
+  const updatedBooks = books.filter(book => book.id !== selectedBook.id)
+  console.log(updatedBooks)
+  setBooks(updatedBooks)
+}
+
 
   return (
     <>
@@ -81,23 +96,23 @@ const onUpdateReview = (updatedReview) => {
               <Route path="/profile">
                 <Profile />
               </Route>
+              <Route path="/books/new">
+                  <AddBookForm/>
+              </Route>
               <Route path="/books/:book_id/reviews/:id/edit">
                   <EditReview onUpdateReview={onUpdateReview}/>
                 </Route>
                 <Route exact path="/books/:id/edit">
-                  <EditBookForm />
+                  <EditBookForm onUpdateBook={onUpdateBook} />
                 </Route>
                 <Route exact path="/books/:id">
                   <Book deleteReview={deleteReview} onAddReview={onAddReview}/>
                 </Route>
-                <Route path="/books/new">
-                  <AddBookForm/>
-              </Route>
-              <Route exact path="/books">
-                  <BooksContainer/>
-              </Route>
+              {/* <Route exact path="/books">
+                  <BooksContainer onDeleteBook={onDeleteBook}/>
+              </Route> */}
               <Route exact path="/">
-                <Home />
+                <Home onDeleteBook={onDeleteBook}/>
               </Route>
             </Switch>
           ) : (

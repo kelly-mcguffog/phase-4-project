@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import { BookContext } from "../Context/BookContext";
+import { useHistory} from "react-router-dom";
 
 function AddBookForm() {
 
@@ -14,6 +15,7 @@ function AddBookForm() {
 
     const [formData, setFormData] = useState(initialState)
     const {books, setBooks} = useContext(BookContext)
+    const history = useHistory()
 
     function onAddBook(newBook) {
         setBooks([...books, newBook]);
@@ -38,6 +40,7 @@ function AddBookForm() {
         })
           .then((r) => r.json())
           .then((newBook) => onAddBook(newBook));
+          history.push("/")
       }
       return (
             <div>

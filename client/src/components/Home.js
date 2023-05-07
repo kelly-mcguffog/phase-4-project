@@ -3,14 +3,14 @@ import { UserContext } from "../Context/UserContext";
 import BooksContainer from "./BooksContainer";
 import Login from "./Login";
 
-function Home() {
+function Home({onDeleteBook}) {
     const {user} = useContext(UserContext)
 
     if (user) {
       return(
         <>
             <h1 className="welcome-text">Welcome, {user.username}!</h1>
-            <BooksContainer/>
+            <BooksContainer onDeleteBook={onDeleteBook}/>
         </>
       )
     } else {

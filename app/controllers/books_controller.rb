@@ -9,6 +9,11 @@ class BooksController < ApplicationController
     def edit
         Book.find(params[:id])
     end
+    def update
+        book = Book.find(params[:id])
+        book.update(book_params)
+        render json: book
+    end
     def new
         Book.new
     end

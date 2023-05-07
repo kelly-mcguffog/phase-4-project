@@ -2,18 +2,13 @@ import React, {useState, useContext} from "react";
 import { BookContext } from "../Context/BookContext";
 import BookItem from "./BookItem";
 
-function BooksContainer() {
-    const {books, setBooks} = useContext(BookContext)
+function BooksContainer({onDeleteBook}) {
+    const {books} = useContext(BookContext)
 
     const [isOn, setIsOn] = useState(false)
 
     function handleClick() {
         setIsOn((isOn) => !isOn);
-    }
-
-    function deleteBook(id) {
-        const updatedBooks = books.filter(book => book.id !== id)
-        setBooks(updatedBooks)
     }
 
     return(
@@ -24,7 +19,7 @@ function BooksContainer() {
         </label>
         <div className="main">
             {books.map(book => (
-                <BookItem key={book.id} book={book} isOn={isOn} deleteBook={deleteBook}/>
+                <BookItem key={book.id} book={book} isOn={isOn} onDeleteBook={onDeleteBook}/>
             ))}
         </div>
         </>

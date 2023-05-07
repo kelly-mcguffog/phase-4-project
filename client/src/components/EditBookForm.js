@@ -2,24 +2,26 @@ import React, { useState, useContext } from "react";
 import { BookContext } from "../Context/BookContext";
 import { useParams, useHistory} from "react-router-dom";
 
-function EditBookForm() {
+function EditBookForm({onUpdateBook}) {
 
     const {id} = useParams();
     const {books} = useContext(BookContext)
     const history = useHistory();
 
-    const initialState = books.find(r => r.id == id)
-    const [formData, setFormData] = useState(initialState)
-    const {title, author, genre, summary, page_count, book_image} = formData
+    const initialState = books.find(book => book.id == id)
+    const [editFormData, setEditFormData] = useState(initialState)
+    const {title, author, genre, summary, page_count, book_image} = editFormData
 
     const handleChangeInput = (e) => {
-        setFormData(editFormData => {
+        setEditFormData(editFormData => {
            return({ 
                 ...editFormData,
                 [e.target.name]: e.target.value
             })          
         })
     }
+
+    console.log(id)
 
     function handleEditSubmit(e) {
         e.preventDefault();
@@ -28,10 +30,10 @@ function EditBookForm() {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(formData),
+          body: JSON.stringify(editFormData),
         })
           .then((r) => r.json())
-          .then((updatedBook) => console.log(updatedBook));
+          .then((updatedBook) => onUpdateBook(updatedBook));
           history.push(`/books/${id}`);
       }
       return (
