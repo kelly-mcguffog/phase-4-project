@@ -1,19 +1,17 @@
 import React from "react";
-// import { ReviewContext } from "../Context/ReviewContext";
 import { Link } from "react-router-dom";
 
-function Review({review, deleteReview, users}) {
-    // const {users, reviews} = book;
-    // const {setReviews} = useContext(ReviewContext)
-    console.log(users)
+function Review({review, users, deleteReview}) {
 
     const {id, comment, rating, book_id, user_id} = review;
 
     const handleDeleteReview = () => {
-        fetch(`/books/${book_id}/reviews/${id}`, {
+        // fetch(`/books/${book_id}/reviews/${id}`, {
+            fetch(`/reviews/${id}`, {
             method: 'DELETE'
         })
-        .then(id => deleteReview(id))
+        // .then(id => deleteReview(id))
+        deleteReview(review)
     }
 
     return(

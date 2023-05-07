@@ -12,6 +12,26 @@ class UsersController < ApplicationController
         render json: User.find(session[:user_id]), status: :ok
     end
 
+    def index
+        render json: User.all, status: :ok
+    end
+
+    def edit
+        User.find(params[:id])
+    end
+
+    def update
+        user = User.find(params[:id])
+        user.update(user_params)
+        render json: user
+    end
+
+    def destroy
+        user = User.find(params[:id])
+        user.destroy
+        head :no_content
+    end
+
     private
 
     def user_params

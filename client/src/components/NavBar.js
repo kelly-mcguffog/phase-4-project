@@ -14,16 +14,7 @@ function NavBar() {
 
     return (
         <header>
-            {user ? (
-                <>
-                    <div className="navbar">
-                        <Link to="/">Home</Link>
-                    </div>
-                </> 
-            ): 
-            <h3 className="navbar logo">BookClub</h3>
-            }
-
+             <Link to="/"><h3 className="navbar logo">BookClub</h3></Link>
         <div className="navbar">
             {user ? (
                 <>

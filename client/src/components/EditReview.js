@@ -1,21 +1,22 @@
 import React, { useState, useContext } from "react";
-import { UserContext } from "../Context/UserContext";
-import { useParams} from "react-router-dom";
-// import { ReviewContext } from "../Context/ReviewContext";
+// import { UserContext } from "../Context/UserContext";
+import { useParams, useHistory} from "react-router-dom";
+import { ReviewContext } from "../Context/ReviewContext";
 // import EditStarRating from "./EditStarRating";
 
-function EditReview() {
+function EditReview({onUpdateReview}) {
     const {book_id, id} = useParams();
-    const {user} = useContext(UserContext)
+    // const {user} = useContext(UserContext)
+    const {reviews} = useContext(ReviewContext)
     const [hover, setHover] = useState(0)
+    const history = useHistory()
 
-    const initialState = user.reviews.find(r => r.id == id)
+    const initialState = reviews.find(review => review.id == id)
     const [formData, setFormData] = useState(initialState)
     const {comment, rating} = formData
     
     const handleChangeInput = (e) => {
         setFormData(editFormData => {
-            console.log(editFormData)
            return({ 
                 ...editFormData,
                 [e.target.name]: e.target.value
@@ -27,6 +28,7 @@ function EditReview() {
     function handleEditSubmit(e) {
         e.preventDefault();
         fetch(`/books/${book_id}/reviews/${id}`, {
+          // fetch(`reviews/${id}`, {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
@@ -34,7 +36,8 @@ function EditReview() {
           body: JSON.stringify(formData),
         })
           .then((r) => r.json())
-          .then((updatedReview) => setFormData(updatedReview));
+          .then((updatedReview) => onUpdateReview(updatedReview));
+          history.push(`/books/${book_id}`);
       }
       return (
             <div>

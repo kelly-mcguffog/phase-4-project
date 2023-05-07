@@ -3,10 +3,7 @@ import { useHistory } from "react-router-dom";
 import { UserContext } from "../Context/UserContext";
 import { Link } from "react-router-dom";
 
-function SignUp() {
-  // const [username, setUsername] = useState("");
-  // const [password, setPassword] = useState("");
-  // const [passwordConfirmation, setPasswordConfirmation] = useState("");
+function Signup() {
   const history = useHistory();
   const {setUser} = useContext(UserContext)
 
@@ -110,4 +107,4 @@ function SignUp() {
   );
 }
 
-export default SignUp;
+export default Signup;

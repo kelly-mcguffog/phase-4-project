@@ -1,42 +1,42 @@
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
+import { useContext} from "react";
 import { useParams, Link } from "react-router-dom";
-import { ReviewProvider } from "../Context/ReviewContext";
 import ReviewContainer from "./ReviewContainer";
+import { BookContext } from "../Context/BookContext"; 
 
-const initialState = {
-  book: null,
-  error: null,
-  status: "pending",
-};
+// const initialState = {
+//   book: null,
+//   error: null,
+//   status: "pending",
+// };
 
-function Book() {
-  const [{ book, error, status }, setState] = useState(initialState);
+function Book({onAddReview, deleteReview}) {
+  // const [{ book, error, status }, setState] = useState(initialState);
   const { id } = useParams();
+  const {books} = useContext(BookContext)
 
-  useEffect(() => {
-    setState(initialState);
-    fetch(`/books/${id}`).then((r) => {
-      if (r.ok) {
-        r.json().then((book) =>
-          setState({ book, error: null, status: "resolved" })
-        );
-      } else {
-        r.json().then((message) =>
-          setState({ book: null, error: message.error, status: "rejected" })
-        );
-      }
-    });
-  }, [id]);
+const book = books.find(book => book.id == id)
 
-  if (status === "pending") return <h1>Loading...</h1>;
+  // useEffect(() => {
+  //   setState(initialState);
+  //   fetch(`/books/${id}`).then((r) => {
+  //     if (r.ok) {
+  //       r.json().then((book) =>
+  //         setState({ book, error: null, status: "resolved" })
+  //       );
+  //     } else {
+  //       r.json().then((message) =>
+  //         setState({ book: null, error: message.error, status: "rejected" })
+  //       );
+  //     }
+  //   });
+  // }, [id]);
 
-  if (status === "rejected") {
-    if (error === "Maximum pageview limit reached") {
-      return <h1>Hi</h1>
-    } else {
-      return <h1>{error}</h1>;
-    }
-  }
+  // if (status === "pending") return <h1>Loading...</h1>;
+
+  // if (status === "rejected") {
+  //     return <h1>{error}</h1>;
+  // }
 
   const { title, author, genre, summary, page_count, book_image } = book;
 
@@ -57,14 +57,11 @@ function Book() {
                 <p>{summary}</p>
                 <div>
                   <Link to={`/books/${id}/edit`}><img className="edit icon" src="https://cdn.onlinewebfonts.com/svg/img_420068.png"/></Link>
-                  {/* <button className="delete-book" onClick={handleDeleteBook}><img className="delete icon" src="https://cdn4.iconfinder.com/data/icons/hodgepodge-vol-1/32/circle_x_delete_cross-512.png"/></button> */}
                 </div>
             </div>
         </div>
         <div id="review-section">
-            <ReviewProvider>
-                <ReviewContainer book={book}/>
-            </ReviewProvider>
+          <ReviewContainer book={book} onAddReview={onAddReview} deleteReview={deleteReview}/>
         </div>
     </article>
   );

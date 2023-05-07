@@ -8,10 +8,12 @@ function ReviewForm({totalReviews, averageRating, onAddReview}) {
     const {user} = useContext(UserContext)
     const [comment, setComment] = useState("");
     const [rating, setRating] = useState(0)
+    
 
     function handleSubmit(e) {
         e.preventDefault();
-        fetch(`/books/${id}/reviews`, {
+        // fetch(`/books/${id}/reviews`, {
+          fetch(`/reviews`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -25,6 +27,8 @@ function ReviewForm({totalReviews, averageRating, onAddReview}) {
         })
           .then((r) => r.json())
           .then((newReview) => onAddReview(newReview));
+          setComment("")
+          setRating(0)
       }
       return (
             <div>

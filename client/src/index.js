@@ -5,13 +5,19 @@ import { BrowserRouter, Route } from "react-router-dom";
 import App from './components/App';
 import reportWebVitals from './reportWebVitals';
 import { UserProvider } from './Context/UserContext';
+import { BookProvider } from "./Context/BookContext";
+import { ReviewProvider } from "./Context/ReviewContext";
 
 ReactDOM.render(
   <React.StrictMode>
     <UserProvider>
+    <ReviewProvider>
+    <BookProvider>
       <BrowserRouter>
         <App />
       </BrowserRouter>
+      </BookProvider>
+      </ReviewProvider>
     </UserProvider>
   </React.StrictMode>,
   document.getElementById('root')
