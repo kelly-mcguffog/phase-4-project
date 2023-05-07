@@ -130,6 +130,7 @@ form {
 .form-text.subhead{
   font-size: 16px;
   font-weight: 300;
+  margin-bottom: 0;
 }
 .logo{
   color:#fff8e7;
@@ -327,4 +328,12 @@ input:checked + .slider:before {
 .edit-form{
   width: 70%;
   margin: 45px auto;
+}
+.error{
+  text-align: center;
+  /* margin: 10px; */
+}
+.error-message{
+  color: rgb(221, 1, 1);
+  margin: 10px;
 }

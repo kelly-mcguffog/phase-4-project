@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 function Signup() {
   const history = useHistory();
   const {setUser} = useContext(UserContext)
+  const [errors, setErrors] = useState([]);
 
   const initialState = {
     name:"",
@@ -36,15 +37,23 @@ function Signup() {
       if (r.ok) {
         r.json().then((user) => setUser(user));
         history.push("/");
+      }else{
+        r.json().then((err) => setErrors(err.errors));
       }
     });
   }
 
+  console.log(errors)
   return (
     <div>
       <form onSubmit={handleSubmit}>
       <h1 className="form-text head">Sign Up</h1>
         <h3 className="form-text subhead">Enter your details to create an account.</h3>
+        <ul className="error-message">
+            {errors.map((err) => (
+            <li key={err}>{err}</li>
+            ))}
+      </ul>
         <input
           type="text"
           id="name"

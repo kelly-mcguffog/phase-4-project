@@ -21,8 +21,6 @@ function EditBookForm({onUpdateBook}) {
         })
     }
 
-    console.log(id)
-
     function handleEditSubmit(e) {
         e.preventDefault();
         fetch(`/books/${id}`, {

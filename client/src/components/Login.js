@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 function Login() {
   const history = useHistory();
   const {setUser} = useContext(UserContext)
+  const [error, setError] = useState([])
 
   const initialState = {
     username: "",
@@ -32,6 +33,8 @@ function Login() {
       if (r.ok) {
         r.json().then((user) => setUser(user));
         history.push("/");
+      }else{
+        r.json().then((err) => setError(err.error));
       }
     });
   }
@@ -41,6 +44,7 @@ function Login() {
       <form onSubmit={handleSubmit}>
         <h1 className="form-text head">Login</h1>
         <h3 className="form-text subhead">Enter your details to sign in to your account.</h3>
+        <p className="error-message error">{error}</p>
         <input
           type="text"
           id="username"
