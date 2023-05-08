@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 function Login() {
   const history = useHistory();
   const {setUser} = useContext(UserContext)
-  const [error, setError] = useState([])
+  const [errors, setErrors] = useState([])
 
   const initialState = {
     username: "",
@@ -34,7 +34,7 @@ function Login() {
         r.json().then((user) => setUser(user));
         history.push("/");
       }else{
-        r.json().then((err) => setError(err.error));
+        r.json().then((err) => setErrors(err.error));
       }
     });
   }
@@ -44,7 +44,7 @@ function Login() {
       <form onSubmit={handleSubmit}>
         <h1 className="form-text head">Login</h1>
         <h3 className="form-text subhead">Enter your details to sign in to your account.</h3>
-        <p className="error-message error">{error}</p>
+        <p className="error-message error">{errors}</p>
         <input
           type="text"
           id="username"

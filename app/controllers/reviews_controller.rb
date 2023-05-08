@@ -4,7 +4,7 @@ class ReviewsController < ApplicationController
     end
     def show
         review = Review.find(params[:id])
-        render json: review
+        render json: review, status: :ok
     end
     def create
         new_review = Review.create!(review_params)
@@ -17,7 +17,7 @@ class ReviewsController < ApplicationController
     def update
         review = Review.find(params[:id])
         review.update(review_params)
-        render json: review
+        render json: review, status: :approved
     end
 
     def destroy

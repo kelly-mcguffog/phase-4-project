@@ -82,7 +82,6 @@ const onUpdateBook = (updatedBook) => {
 
 const onDeleteBook = (selectedBook) => {
   const updatedBooks = books.filter(book => book.id !== selectedBook.id)
-  console.log(updatedBooks)
   setBooks(updatedBooks)
 }
 
@@ -97,7 +96,7 @@ const onDeleteBook = (selectedBook) => {
                 <Profile />
               </Route>
               <Route path="/books/new">
-                  <AddBookForm/>
+                  <AddBookForm />
               </Route>
               <Route path="/books/:book_id/reviews/:id/edit">
                   <EditReview onUpdateReview={onUpdateReview}/>
@@ -118,7 +117,7 @@ const onDeleteBook = (selectedBook) => {
           ) : (
             <Switch>
               <Route path="/signup">
-                <Signup/>
+                <Signup />
               </Route>
               <Route path="/login">
                 <Login />

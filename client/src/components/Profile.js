@@ -1,12 +1,12 @@
 import React, {useContext} from "react";
 import { UserContext } from "../Context/UserContext";
-import Review from "./Review";
+// import Review from "./Review";
 
 function Profile() {
     const {user} = useContext(UserContext)
-    const userReviews = user.reviews.map(review => {
-        console.log(review)
-    })
+    // const userReviews = user.reviews.map(review => {
+    //     console.log(review)
+    // })
 
     return(
         <>

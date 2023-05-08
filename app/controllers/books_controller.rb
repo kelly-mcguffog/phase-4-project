@@ -4,7 +4,7 @@ class BooksController < ApplicationController
     end
     def show
         book = Book.find(params[:id])
-        render json: book
+        render json: book, status: ok
     end
     def edit
         Book.find(params[:id])
@@ -12,7 +12,7 @@ class BooksController < ApplicationController
     def update
         book = Book.find(params[:id])
         book.update(book_params)
-        render json: book
+        render json: book, status: :approved
     end
     def new
         Book.new

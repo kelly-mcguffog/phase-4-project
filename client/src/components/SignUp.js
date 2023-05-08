@@ -11,7 +11,7 @@ function Signup() {
   const initialState = {
     name:"",
     age:"",
-    profile_picture:"",
+    profile_picture:"https://www.pngitem.com/pimgs/m/30-307416_profile-icon-png-image-free-download-searchpng-employee.png",
     username: "",
     password: "",
     passwordConfirmation:""
@@ -42,8 +42,6 @@ function Signup() {
       }
     });
   }
-
-  console.log(errors)
   return (
     <div>
       <form onSubmit={handleSubmit}>

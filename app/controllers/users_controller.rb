@@ -41,8 +41,7 @@ class UsersController < ApplicationController
     def user_data_invalid(error_hash)
         render json: { errors: error_hash.record.errors.full_messages }, status: :unprocessable_entity
     end
-
     def user_unauthorized
-        render json: { error: "Please login to view your account page." }, status: :unauthorized
+        render json: { error: "Please login to view your this page." }, status: :unauthorized
     end
 end

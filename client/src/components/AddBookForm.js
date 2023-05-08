@@ -10,12 +10,14 @@ function AddBookForm() {
         genre: "",
         summary: "",
         page_count: "",
-        book_image: ""
+        book_image: "https://m.media-amazon.com/images/I/21-kmLZ9t0L._AC_UF1000,1000_QL80_.jpg"
     }
 
     const [formData, setFormData] = useState(initialState)
     const {books, setBooks} = useContext(BookContext)
     const history = useHistory()
+    const [errors, setErrors] = useState([])
+  
 
     function onAddBook(newBook) {
         setBooks([...books, newBook]);
@@ -37,15 +39,24 @@ function AddBookForm() {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(formData),
-        })
-          .then((r) => r.json())
-          .then((newBook) => onAddBook(newBook));
-          history.push("/")
+        }).then((r) => {
+          if (r.ok) {
+            r.json().then((newBook) => onAddBook(newBook));
+            history.push("/")
+          } else {
+            r.json().then((err) => setErrors(err.errors));
+          }
+        });
       }
       return (
             <div>
                 <form className="review-form" onSubmit={handleSubmit}>
                     <h1>Add to Our Collection</h1>
+                    <ul className="error-message">
+                      {errors.map((err) => (
+                        <li key={err}>{err}</li>
+                      ))}
+                    </ul>
                     <input 
                     type="text" 
                     name="title" 

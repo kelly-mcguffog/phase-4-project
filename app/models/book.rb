@@ -8,6 +8,8 @@ class Book < ApplicationRecord
 
     validates :genre, inclusion: {
     in: GENRE,
-    message: "Must be one of: #{GENRE.join(', ')}"
+    message: "must be one of the following: #{GENRE.join(', ')}"
   }
+
 end
+
