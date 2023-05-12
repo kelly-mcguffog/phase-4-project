@@ -6,14 +6,14 @@ function Review({review, users, deleteReview}) {
     const {id, comment, rating, book_id, user_id} = review;
 
     const handleDeleteReview = () => {
-        // fetch(`/books/${book_id}/reviews/${id}`, {
             fetch(`/reviews/${id}`, {
             method: 'DELETE'
         })
-        // .then(id => deleteReview(id))
         deleteReview(review)
     }
 
+    // console.log(review)
+    // console.log(users)
     return(
         <div className="review">
             <h2>{comment}</h2>

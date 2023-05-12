@@ -7,10 +7,13 @@ function EditBookForm({onUpdateBook}) {
     const {id} = useParams();
     const {books} = useContext(BookContext)
     const history = useHistory();
+    const [errors, setErrors] = useState([])
 
     const initialState = books.find(book => book.id == id)
     const [editFormData, setEditFormData] = useState(initialState)
+
     const {title, author, genre, summary, page_count, book_image} = editFormData
+
 
     const handleChangeInput = (e) => {
         setEditFormData(editFormData => {
@@ -29,15 +32,24 @@ function EditBookForm({onUpdateBook}) {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(editFormData),
+        }).then((r) => {
+          if (r.ok) {
+            r.json().then((updatedBook) => onUpdateBook(updatedBook));
+            history.push(`/books/${id}`);
+          } else {
+            r.json().then((err) => onUpdateBook(err));
+          }
         })
-          .then((r) => r.json())
-          .then((updatedBook) => onUpdateBook(updatedBook));
-          history.push(`/books/${id}`);
       }
       return (
             <div>
-                <form className="edit-form review-form" onSubmit={handleEditSubmit}>
+                <form className="book-form review-form" onSubmit={handleEditSubmit}>
                     <h1>Edit Book Details</h1>
+                    <ul className="error-message">
+                      {/* {errors.map((err) => (
+                        <li key={err}>{err}</li>
+                      ))} */}
+                    </ul>
                     <input 
                     type="text" 
                     name="title" 

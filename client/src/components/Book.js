@@ -1,44 +1,20 @@
-// import { useEffect, useState } from "react";
-import { useContext} from "react";
+import { useContext, useState} from "react";
 import { useParams, Link } from "react-router-dom";
 import ReviewContainer from "./ReviewContainer";
 import { BookContext } from "../Context/BookContext"; 
 
-// const initialState = {
-//   book: null,
-//   error: null,
-//   status: "pending",
-// };
 
 function Book({onAddReview, deleteReview}) {
-  // const [{ book, error, status }, setState] = useState(initialState);
   const { id } = useParams();
   const {books} = useContext(BookContext)
 
 const book = books.find(book => book.id == id)
 
-  // useEffect(() => {
-  //   setState(initialState);
-  //   fetch(`/books/${id}`).then((r) => {
-  //     if (r.ok) {
-  //       r.json().then((book) =>
-  //         setState({ book, error: null, status: "resolved" })
-  //       );
-  //     } else {
-  //       r.json().then((message) =>
-  //         setState({ book: null, error: message.error, status: "rejected" })
-  //       );
-  //     }
-  //   });
-  // }, [id]);
+if(!book){
+  return <h1>loading</h1>
+}
 
-  // if (status === "pending") return <h1>Loading...</h1>;
-
-  // if (status === "rejected") {
-  //     return <h1>{error}</h1>;
-  // }
-
-  const { title, author, genre, summary, page_count, book_image } = book;
+const { title, author, genre, summary, page_count, book_image } = book;
 
 
 
@@ -62,8 +38,9 @@ const book = books.find(book => book.id == id)
                 </div>
             </div>
         </div>
-        <div id="review-section">
+        <div className="review-section">
           <ReviewContainer book={book} onAddReview={onAddReview} deleteReview={deleteReview}/>
+
         </div>
     </article>
   );

@@ -1,17 +1,16 @@
-import React, { useState, useContext } from "react";
-// import { UserContext } from "../Context/UserContext";
+import React, { useState, useContext, useEffect } from "react";
 import { useParams, useHistory} from "react-router-dom";
-import { ReviewContext } from "../Context/ReviewContext";
-// import EditStarRating from "./EditStarRating";
+import { BookContext } from "../Context/BookContext";
 
 function EditReview({onUpdateReview}) {
     const {book_id, id} = useParams();
-    // const {user} = useContext(UserContext)
-    const {reviews} = useContext(ReviewContext)
+    const {books} = useContext(BookContext)
     const [hover, setHover] = useState(0)
     const history = useHistory()
 
-    const initialState = reviews.find(review => review.id == id)
+    const book = books.find(book => book.id == book_id)
+    const initialState = book.reviews.find(review => review.id == id)
+    
     const [formData, setFormData] = useState(initialState)
     const {comment, rating} = formData
     
@@ -28,7 +27,6 @@ function EditReview({onUpdateReview}) {
     function handleEditSubmit(e) {
         e.preventDefault();
         fetch(`/books/${book_id}/reviews/${id}`, {
-          // fetch(`reviews/${id}`, {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",

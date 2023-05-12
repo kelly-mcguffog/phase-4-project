@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import { Switch, Route } from "react-router-dom";
 import { UserContext } from "../Context/UserContext";
 import { BookContext } from "../Context/BookContext";
-import { ReviewContext } from "../Context/ReviewContext";
 import Login from "./Login";
 import Signup from "./Signup";
 import NavBar from "./NavBar";
@@ -15,11 +14,9 @@ import EditBookForm from "./EditBookForm";
 
 function App() {
   
-  const {user} = useContext(UserContext)
+  const {user,setUser} = useContext(UserContext)
   
-  const {reviews, setReviews} = useContext(ReviewContext)
   const {books, setBooks} = useContext(BookContext)
-  
   
   function onAddReview(newReview) {
     const updatedBooks = books.map(book => {
@@ -29,12 +26,16 @@ function App() {
         return book
       }
     })
+    if(newReview.user_id === user.id){
+      setUser({...user, reviews: [...user.reviews, newReview]})
+    }else{
+      return user
+    }
     setBooks(updatedBooks)
-    setReviews([...reviews, newReview]);
+
   }
 
   function deleteReview(selectedReview) {
-    const updatedReviews = reviews.filter(review => review.id !== selectedReview.id)
     const updatedBooks = books.map(book => {
       const match = [...book.reviews].filter(review => review.id !== selectedReview.id)
 
@@ -45,28 +46,20 @@ function App() {
       }      
     })
     setBooks(updatedBooks)
-    setReviews(updatedReviews)
 }
 
-const onUpdateReview = (updatedReview) => {
-  const updatedList = reviews.map(review => {
+const onUpdateReview = (updatedReview) => {   
+    const selectedBook = books.find(book => book.id === updatedReview.book_id)
+    const bookReviews = selectedBook.reviews.map(review => {
       if(review.id === updatedReview.id){
-          return updatedReview
-      } else {
-          return review
+        return updatedReview
+      }else{
+        return review
       }
-  })
-  setReviews(updatedList)
+    })
 
-  const updatedBooks = books.map(book => {
-    const match = updatedList.filter(review => review.book_id === updatedReview.book_id)
-    if(book.id === updatedReview.book_id){
-      return {...book, reviews: match}
-    }else{
-      return book
-    }
-  })
-  setBooks(updatedBooks)
+    console.log({...selectedBook, reviews: bookReviews})
+    
 }
 
 const onUpdateBook = (updatedBook) => {

@@ -9,7 +9,8 @@ class UsersController < ApplicationController
     end
 
     def show
-        render json: User.find(session[:user_id]), status: :ok
+        user = User.find(session[:user_id])
+        render json: user, include: ["reviews", "reviews.book"], status: :ok
     end
 
     def index

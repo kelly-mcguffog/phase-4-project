@@ -9,7 +9,7 @@ function Home({onDeleteBook}) {
     if (user) {
       return(
         <>
-            <h1 className="welcome-text">Welcome, {user.username}!</h1>
+            <h1 className="welcome-text">BookClub</h1>
             <BooksContainer onDeleteBook={onDeleteBook}/>
         </>
       )

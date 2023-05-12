@@ -50,7 +50,7 @@ function AddBookForm() {
       }
       return (
             <div>
-                <form className="review-form" onSubmit={handleSubmit}>
+                <form className="book-form review-form" onSubmit={handleSubmit}>
                     <h1>Add to Our Collection</h1>
                     <ul className="error-message">
                       {errors.map((err) => (

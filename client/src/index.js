@@ -6,18 +6,18 @@ import App from './components/App';
 import reportWebVitals from './reportWebVitals';
 import { UserProvider } from './Context/UserContext';
 import { BookProvider } from "./Context/BookContext";
-import { ReviewProvider } from "./Context/ReviewContext";
+// import { ReviewProvider } from "./Context/ReviewContext";
 
 ReactDOM.render(
   <React.StrictMode>
     <UserProvider>
-    <ReviewProvider>
+    {/* <ReviewProvider> */}
     <BookProvider>
       <BrowserRouter>
         <App />
       </BrowserRouter>
       </BookProvider>
-      </ReviewProvider>
+      {/* </ReviewProvider> */}
     </UserProvider>
   </React.StrictMode>,
   document.getElementById('root')

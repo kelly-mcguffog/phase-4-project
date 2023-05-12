@@ -14,7 +14,7 @@ function NavBar() {
 
     return (
         <header>
-             <Link to="/"><h3 className="navbar logo">BookClub</h3></Link>
+             <Link to="/"><h3 className="navbar logo">Home</h3></Link>
         <div className="navbar">
             {user ? (
                 <>
