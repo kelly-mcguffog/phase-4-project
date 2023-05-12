@@ -72,14 +72,15 @@ const onUpdateBook = (updatedBook) => {
   })
   setBooks(updatedList)
 
-  const userBookList = user.reviews.map(review => {
-    if(review.book.id === updatedBook.id){
-      return {...review, book: [updatedBook]}
-    }else{
-      return {...review, book: [review.book]}
+  const updatedUserBookList = user.reviews.map(review => {
+    if(review.book_id === updatedBook.id){
+        return {...review, book: updatedBook}
+    } else {
+        return {...review, book: review.book}
     }
-  })
-  // console.log({...user, reviews: userBookList })
+})
+
+  setUser({...user, reviews: updatedUserBookList})
 }
 
 const onDeleteBook = (selectedBook) => {
