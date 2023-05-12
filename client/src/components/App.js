@@ -58,7 +58,7 @@ const onUpdateReview = (updatedReview) => {
       }
     })
 
-    console.log({...selectedBook, reviews: bookReviews})
+    // console.log({...selectedBook, reviews: bookReviews})
     
 }
 
@@ -71,11 +71,24 @@ const onUpdateBook = (updatedBook) => {
       }
   })
   setBooks(updatedList)
+
+  const userBookList = user.reviews.map(review => {
+    if(review.book.id === updatedBook.id){
+      return {...review, book: [updatedBook]}
+    }else{
+      return {...review, book: [review.book]}
+    }
+  })
+  // console.log({...user, reviews: userBookList })
 }
 
 const onDeleteBook = (selectedBook) => {
   const updatedBooks = books.filter(book => book.id !== selectedBook.id)
   setBooks(updatedBooks)
+
+  const updatedUserBooks = user.reviews.filter(review => review.book_id !== selectedBook.id)
+  setUser({...user, reviews: updatedUserBooks})
+
 }
 
 

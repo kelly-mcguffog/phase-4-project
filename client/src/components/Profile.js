@@ -5,7 +5,7 @@ import { UserContext } from "../Context/UserContext";
 function Profile() {
     const {user} = useContext(UserContext)
 
-    console.log(user)
+    // console.log(user)
     return(
         <>
             <div className="details">
@@ -21,7 +21,6 @@ function Profile() {
             </div>
             <div className="review-section">
                 <h1 className="review-header">My Book Reviews</h1>
-                {/* <h3>Books Reviewed: {user.reviews.length}</h3> */}
                 {user.reviews.map(review => {
                     return(    
                     <div className="review details" key={review.id}>
