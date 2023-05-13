@@ -62,8 +62,25 @@ const onUpdateReview = (updatedReview) => {
       }
     })
 
-   console.log({...selectedBook, reviews: bookReviews})
-    
+    const updatedBook = {...selectedBook, reviews: bookReviews}
+
+    const updatedBookList = books.map(book => {
+      if(book.id === updatedBook.id){
+        return updatedBook
+      }else{
+        return book
+      }
+    })
+   setBooks(updatedBookList)
+
+  const updateUserReview = user.reviews.map(review => {
+    if(review.id === updatedReview.id){
+      return updatedReview
+    }else{
+      return review
+    }
+  })
+  setUser({...user, reviews: updateUserReview})
 }
 
 const onUpdateBook = (updatedBook) => {

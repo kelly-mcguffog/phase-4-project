@@ -14,6 +14,7 @@ if(!book){
   return <h1>loading</h1>
 }
 
+
 const { title, author, genre, summary, page_count, book_image } = book;
 
 
