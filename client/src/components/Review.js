@@ -1,19 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import ReviewButtons from "./ReviewButtons";
 
 function Review({review, users, deleteReview}) {
 
-    const {id, comment, rating, book_id, user_id} = review;
+    const {comment, rating, user_id} = review;
 
-    const handleDeleteReview = () => {
-            fetch(`/reviews/${id}`, {
-            method: 'DELETE'
-        })
-        deleteReview(review)
-    }
-
-    // console.log(review)
-    // console.log(users)
     return(
         <div className="review">
             <h2>{comment}</h2>
@@ -22,8 +13,7 @@ function Review({review, users, deleteReview}) {
                 if(u.id === user_id)
                     return u.name
             })}</h5>
-            <button className="form-button" onClick={handleDeleteReview}>Delete</button>
-            <Link className="form-button" to={`/books/${book_id}/reviews/${id}/edit`}>Edit</Link>
+            <ReviewButtons deleteReview={deleteReview} review={review}/>
         </div>
     )
 }

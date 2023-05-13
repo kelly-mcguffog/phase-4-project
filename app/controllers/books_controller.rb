@@ -4,7 +4,9 @@ class BooksController < ApplicationController
     end
     def show
         book = Book.find(params[:id])
-        render json: book, status: :ok
+        # render json: book, status: :ok
+        render json: book, include: ["user", "user.reviews"], status: :ok
+
     end
     def edit
         Book.find(params[:id])

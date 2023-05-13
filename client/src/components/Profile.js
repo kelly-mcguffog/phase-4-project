@@ -1,11 +1,10 @@
 import React, {useContext} from "react";
 import { UserContext } from "../Context/UserContext";
+import ReviewButtons from "./ReviewButtons";
 
 
-function Profile() {
+function Profile({deleteReview}) {
     const {user} = useContext(UserContext)
-
-    // console.log(user)
     return(
         <>
             <div className="details">
@@ -30,6 +29,7 @@ function Profile() {
                             <p className="star">{"★".repeat(review.rating)}</p>
                             <h5 className="title"><strong>{review.book.title}</strong></h5>
                             <h5 className="author"><em>{review.book.author}</em></h5>
+                            <ReviewButtons deleteReview={deleteReview} review={review}/>
                         </div>
                     </div>
                     )  

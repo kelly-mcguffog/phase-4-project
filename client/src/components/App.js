@@ -46,6 +46,10 @@ function App() {
       }      
     })
     setBooks(updatedBooks)
+
+    const updatedUserReviews = user.reviews.filter(review => review.id !== selectedReview.id)
+    setUser({...user, reviews: updatedUserReviews})
+
 }
 
 const onUpdateReview = (updatedReview) => {   
@@ -58,7 +62,7 @@ const onUpdateReview = (updatedReview) => {
       }
     })
 
-    // console.log({...selectedBook, reviews: bookReviews})
+   console.log({...selectedBook, reviews: bookReviews})
     
 }
 
@@ -100,7 +104,7 @@ const onDeleteBook = (selectedBook) => {
           {user ? (
             <Switch>
               <Route path="/profile">
-                <Profile />
+                <Profile deleteReview={deleteReview}/>
               </Route>
               <Route path="/books/new">
                   <AddBookForm />
