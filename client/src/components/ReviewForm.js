@@ -13,7 +13,6 @@ function ReviewForm({totalReviews, averageRating, onAddReview}) {
     function handleSubmit(e) {
         e.preventDefault();
         fetch(`/books/${id}/reviews`, {
-          // fetch(`/reviews`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

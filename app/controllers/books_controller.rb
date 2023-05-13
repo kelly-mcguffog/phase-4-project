@@ -1,12 +1,12 @@
 class BooksController < ApplicationController
     def index
-        render json: Book.all, status: :ok
+        book = Book.all
+        render json: book, include: ["reviews", "reviews.user"], status: :ok
+
     end
     def show
         book = Book.find(params[:id])
-        # render json: book, status: :ok
-        render json: book, include: ["user", "user.reviews"], status: :ok
-
+        render json: book, status: :ok
     end
     def edit
         Book.find(params[:id])

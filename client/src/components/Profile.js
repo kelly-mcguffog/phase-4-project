@@ -5,27 +5,41 @@ import ReviewButtons from "./ReviewButtons";
 
 function Profile({deleteReview}) {
     const {user} = useContext(UserContext)
+    const topReviews = user.reviews.filter(review => review.rating > 4).slice(0, 5)
+    console.log(topReviews)
     return(
         <>
             <div className="details">
-                <div className="headshot"> 
-                    <img className="image" src={user.profile_picture}></img>
+                <div className="image-cropper profile-cropper">
+                    <img className="profile-image" src={user.profile_picture}></img>
                 </div>
                 <div className="profile-info">
-                    <h1>Welcome, {user.name}!</h1>
+                    <h1 className="page-header profile-username">{user.name}</h1>
                     <p className="profile-text"><strong>Username:</strong> {user.username}</p>
                     <p className="profile-text"><strong>Age:</strong> {user.age} years old</p>
                     <button className="form-button">Edit Information</button>
                 </div>
             </div>
+            <div>
+                <h3 className="page-header">{user.name}'s Favorite Books</h3>
+                <div className="favorites">
+                {topReviews.map(review => {
+                    return(
+                        <div className="books favorite-books" key={review.id}>
+                        <img className="image" src={review.book.book_image}></img>
+                        </div>
+                    )
+                })}
+                </div>
+            </div>
             <div className="review-section">
-                <h1 className="review-header">My Book Reviews</h1>
+                <h3 className="page-header review-header">{user.name}'s Book Reviews</h3>
                 {user.reviews.map(review => {
                     return(    
                     <div className="review details" key={review.id}>
                         <img className="review-image" src={review.book.book_image}></img>
                         <div className="details-text">
-                            <h2>{review.comment}</h2>
+                            <h2 className="comment">{review.comment}</h2>
                             <p className="star">{"★".repeat(review.rating)}</p>
                             <h5 className="title"><strong>{review.book.title}</strong></h5>
                             <h5 className="author"><em>{review.book.author}</em></h5>
