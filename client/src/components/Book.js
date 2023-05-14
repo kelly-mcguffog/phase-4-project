@@ -17,8 +17,6 @@ if(!book){
 
 const { title, author, genre, summary, page_count, book_image } = book;
 
-
-
   return (
     <article>
         <div className="details">

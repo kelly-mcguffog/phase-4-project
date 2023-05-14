@@ -32,7 +32,6 @@ function App() {
       return user
     }
     setBooks(updatedBooks)
-
   }
 
   function deleteReview(selectedReview) {
@@ -110,10 +109,9 @@ const onDeleteBook = (selectedBook) => {
 
   const updatedUserBooks = user.reviews.filter(review => review.book_id !== selectedBook.id)
   setUser({...user, reviews: updatedUserBooks})
-
 }
 
-console.log(books)
+
   return (
     <>
         <NavBar/>
@@ -135,9 +133,6 @@ console.log(books)
                 <Route exact path="/books/:id">
                   <Book deleteReview={deleteReview} onAddReview={onAddReview}/>
                 </Route>
-              {/* <Route exact path="/books">
-                  <BooksContainer onDeleteBook={onDeleteBook}/>
-              </Route> */}
               <Route exact path="/">
                 <Home onDeleteBook={onDeleteBook}/>
               </Route>

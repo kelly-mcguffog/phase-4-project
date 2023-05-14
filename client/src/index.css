@@ -21,7 +21,6 @@ header {
 .navbar{
   margin: 0px 30px;
 }
-
 header a,
 header button {
   font-size: 1rem;
@@ -31,6 +30,9 @@ header button {
   text-decoration: none;
   color: #fff8e7;;
   cursor: pointer;
+}
+.active{
+  text-decoration: underline;
 }
 .logout{
   color: #013220;
@@ -395,7 +397,7 @@ input:checked + .slider:before {
   color: white;
 }
 .filter{
-  width: 80px;
+  width: 100px;
   font-size: 12px;
   padding: 5px;
   border-radius: 5px 0px 0px 5px;

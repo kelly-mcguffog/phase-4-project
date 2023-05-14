@@ -4,12 +4,12 @@ function Filter({handleFilter}){
 
     return (   
          <select onChange={handleFilter} className="filter">
-                <option name="rating" value="All">All</option>
-                <option name="rating" value={5}>5</option>
-                <option name="rating" value={4}>4</option>
-                <option name="rating" value={3}>3</option>
-                <option name="rating" value={2}>2</option>
-                <option name="rating" value={1}>1</option>
+                <option  value="All">All Ratings</option>
+                <option  value="5">5 Stars</option>
+                <option  value="4">4 Stars</option>
+                <option  value="3">3 Stars</option>
+                <option  value="2">2 Stars</option>
+                <option  value="1">1 Star</option>
          </select>
       );    
 }

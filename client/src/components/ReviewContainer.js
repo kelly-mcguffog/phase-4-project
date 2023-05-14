@@ -8,7 +8,8 @@ function ReviewContainer({book, onAddReview, deleteReview}) {
     const ratings = reviews.map((ratings) => ratings.rating)
     const averageRating = (ratings.reduce((a, b) => a + b, 0) / ratings.length).toFixed(1)
     const totalReviews = reviews.length
-
+    
+    
     return(
         <div>
 
