@@ -6,7 +6,7 @@ import ReviewButtons from "./ReviewButtons";
 function Profile({deleteReview}) {
     const {user} = useContext(UserContext)
     const topReviews = user.reviews.filter(review => review.rating > 4).slice(0, 5)
-    console.log(topReviews)
+    console.log(user)
     return(
         <>
             <div className="details">

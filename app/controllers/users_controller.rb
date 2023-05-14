@@ -13,10 +13,6 @@ class UsersController < ApplicationController
         render json: user, include: ["reviews", "reviews.book"], status: :ok
     end
 
-    def index
-        render json: User.all, status: :ok
-    end
-
     def edit
         User.find(params[:id])
     end
@@ -36,7 +32,7 @@ class UsersController < ApplicationController
     private
 
     def user_params
-        params.permit(:name, :age, :profile_picture, :username, :password, :password_confirmation, :user)
+        params.permit(:name, :age, :profile_picture, :username, :password, :password_confirmation)
     end
 
     def user_data_invalid(error_hash)
