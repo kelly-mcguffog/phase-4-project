@@ -6,7 +6,7 @@ function ReviewContainer({book, onAddReview, deleteReview}) {
     const {reviews} = book;
 
     const ratings = reviews.map((ratings) => ratings.rating)
-    const averageRating = ratings.reduce((a, b) => a + b, 0) / ratings.length;
+    const averageRating = (ratings.reduce((a, b) => a + b, 0) / ratings.length).toFixed(1)
     const totalReviews = reviews.length
 
     return(

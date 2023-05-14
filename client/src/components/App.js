@@ -113,7 +113,7 @@ const onDeleteBook = (selectedBook) => {
 
 }
 
-
+console.log(books)
   return (
     <>
         <NavBar/>

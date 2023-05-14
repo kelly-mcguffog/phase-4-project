@@ -272,13 +272,17 @@ h1{
 p{
   margin-top: 0px;
 }
+.menu{
+  display: flex;
+  margin: 3rem;
+}
 .switch {
   position: relative;
   width: 55px;
   height: 25px;
-  float: right;
+  /* float: right;
   right: 50px;
-  top: 0px;
+  top: 0px; */
 }
 
 .switch input {
@@ -335,7 +339,7 @@ input:checked + .slider:before {
 
 .welcome-text{
   text-align: center;
-  margin-top: 30px;
+  margin-top: 3rem;
 }
 .editMode{
   display: block;
@@ -377,4 +381,26 @@ input:checked + .slider:before {
 .error-message{
   color: rgb(221, 1, 1);
   margin: 10px;
+}
+.search{
+  /* margin: 0px 20px 20px 20px; */
+  width: 100%;
+}
+.input-search{
+  width: 95%;
+  padding: 5px;
+  border-radius: 0px 5px 5px 0px;
+  background: transparent;
+  border: 1px solid #013220;
+  color: white;
+}
+.filter{
+  width: 80px;
+  font-size: 12px;
+  padding: 5px;
+  border-radius: 5px 0px 0px 5px;
+  border: 1px solid #013220;
+  border-right: 0px;
+  color: #f9e8c7;
+  background-color:#013220;
 }
