@@ -7,17 +7,13 @@ class BooksController < ApplicationController
         book = Book.find(params[:id])
         render json: book, status: :ok
     end
-    def edit
-        Book.find(params[:id])
-    end
+
     def update
         book = Book.find(params[:id])
         book.update(book_params)
-        render json: book, status: :ok
+        render json: book, include: ["reviews", "reviews.user"], status: :ok
     end
-    def new
-        Book.new
-    end
+
     def create
         new_book = Book.create!(book_params)
         render json: new_book, status: :created

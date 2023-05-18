@@ -13,16 +13,6 @@ class UsersController < ApplicationController
         render json: user, include: ["reviews", "reviews.book"], status: :ok
     end
 
-    def edit
-        User.find(params[:id])
-    end
-
-    def update
-        user = User.find(params[:id])
-        user.update(user_params)
-        render json: user
-    end
-
     def destroy
         user = User.find(params[:id])
         user.destroy

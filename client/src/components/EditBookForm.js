@@ -37,7 +37,7 @@ function EditBookForm({onUpdateBook}) {
             r.json().then((updatedBook) => onUpdateBook(updatedBook));
             history.push(`/books/${id}`);
           } else {
-            r.json().then((err) => onUpdateBook(err));
+            r.json().then((err) => setErrors(err));
           }
         })
       }
@@ -46,9 +46,9 @@ function EditBookForm({onUpdateBook}) {
                 <form className="book-form review-form" onSubmit={handleEditSubmit}>
                     <h1>Edit Book Details</h1>
                     <ul className="error-message">
-                      {/* {errors.map((err) => (
+                      {errors.map((err) => (
                         <li key={err}>{err}</li>
-                      ))} */}
+                      ))}
                     </ul>
                     <input 
                     type="text" 

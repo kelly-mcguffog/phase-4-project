@@ -55,7 +55,7 @@ user2 = User.create(
 user3 = User.create(
     name: "Roni Kamin",
     age: 59,
-    profile_picture: "https://media.licdn.com/dms/image/C4E03AQEtCHaKDXeT1g/profile-displayphoto-shrink_800_800/0/1659899854745?e=1687996800&v=beta&t=v3CZK_GPGSw3ke5obdALFzOm70vrG8IlHbdFMg7uA7I",
+    profile_picture: "https://media.licdn.com/dms/image/C4E03AQGhbLpNLJJwlg/profile-displayphoto-shrink_800_800/0/1543949939456?e=2147483647&v=beta&t=aIAy9DKUKivRr8zJ1aCuqUeAa3J1vRGDkz7tdOM3uw8",
     username: "roni.kamin",
     password_digest: "Windham123"
 )

@@ -17,10 +17,10 @@ function ReviewButtons({review, deleteReview}) {
 
 if (user.id === user_id) {
     return(
-      <>
+      <div className="profile-buttons">
           <button className="form-button" onClick={handleDeleteReview}>Delete</button>
           <Link className="form-button" to={`/books/${book_id}/reviews/${id}/edit`}>Edit</Link>
-      </>
+      </div>
     )
   } else {
     return (

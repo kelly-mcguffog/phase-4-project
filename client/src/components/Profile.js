@@ -1,4 +1,5 @@
 import React, {useContext} from "react";
+import { Link } from "react-router-dom";
 import { UserContext } from "../Context/UserContext";
 import ReviewButtons from "./ReviewButtons";
 
@@ -6,7 +7,6 @@ import ReviewButtons from "./ReviewButtons";
 function Profile({deleteReview}) {
     const {user} = useContext(UserContext)
     const topReviews = user.reviews.filter(review => review.rating > 4).slice(0, 5)
-    console.log(user)
     return(
         <>
             <div className="details">
@@ -17,7 +17,6 @@ function Profile({deleteReview}) {
                     <h1 className="page-header profile-username">{user.name}</h1>
                     <p className="profile-text"><strong>Username:</strong> {user.username}</p>
                     <p className="profile-text"><strong>Age:</strong> {user.age} years old</p>
-                    <button className="form-button">Edit Information</button>
                 </div>
             </div>
             <div>
@@ -26,7 +25,9 @@ function Profile({deleteReview}) {
                 {topReviews.map(review => {
                     return(
                         <div className="books favorite-books" key={review.id}>
-                        <img className="image" src={review.book.book_image}></img>
+                        <Link to={`/books/${review.book_id}`}>
+                            <img className="image" src={review.book.book_image}></img>
+                        </Link>
                         </div>
                     )
                 })}
@@ -37,7 +38,9 @@ function Profile({deleteReview}) {
                 {user.reviews.map(review => {
                     return(    
                     <div className="review details" key={review.id}>
-                        <img className="review-image" src={review.book.book_image}></img>
+                        <Link to={`/books/${review.book_id}`}>
+                            <img className="review-image" src={review.book.book_image}></img>
+                        </Link>
                         <div className="details-text">
                             <h2 className="comment">{review.comment}</h2>
                             <p className="star">{"★".repeat(review.rating)}</p>

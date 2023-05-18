@@ -111,7 +111,6 @@ const onDeleteBook = (selectedBook) => {
   setUser({...user, reviews: updatedUserBooks})
 }
 
-
   return (
     <>
         <NavBar/>
