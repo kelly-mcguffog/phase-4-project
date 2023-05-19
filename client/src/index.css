@@ -16,11 +16,12 @@ header {
   justify-content: space-between;
   align-items: center;
   background-color: #013220;
-  
 }
+
 .navbar{
   margin: 0px 30px;
 }
+
 header a,
 header button {
   font-size: 1rem;
@@ -31,15 +32,18 @@ header button {
   color: #fff8e7;;
   cursor: pointer;
 }
+
 .active{
   text-decoration: underline;
 }
+
 .logout{
   color: #013220;
   background-color: #f9e8c7;
   border: none;
   border-radius: 3px;
 }
+
 .main {
   display: flex;
   justify-content: center;
@@ -53,18 +57,20 @@ header button {
   display: flex;
   margin: 0 3rem;
 }
+
 .details{
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin: 3rem;
-
 }
+
 .details-image{
   height: 400px;
   margin-right: 3rem;
   border-radius: 5px;
 }
+
 .review-image{
   height: 200px;
   margin-right: 3rem;
@@ -84,12 +90,11 @@ header button {
   position: relative;
   overflow: hidden;
   border-radius: 50%;
-  /* margin-right: 3rem; */
 }
+
 .profile-cropper{
   width: 200px;
   height: 200px;
-  /* margin-left: 3rem; */
 }
 
 .details-text{
@@ -113,6 +118,7 @@ header button {
   -webkit-transition: transform 0.25s ease-in-out;
   vertical-align: middle;
 }
+
 .favorite-books{
   margin: 0;
 }
@@ -125,6 +131,7 @@ header button {
   display: block;
   border-radius: 5px;
 }
+
 .author{
   margin: 0;
   font-weight: 300;
@@ -140,13 +147,13 @@ header button {
   outline: none;
   cursor: pointer;
 }
+
 .on{
-  color: #000;
+  color: #013220;
 }
 
 .off{
   color: #ccc;
-  
 }
 
 form {
@@ -161,17 +168,21 @@ form {
 .form-text.head{
   margin: 0px;
 }
+
 .form-text.subhead{
   font-size: 16px;
   font-weight: 300;
   margin-bottom: 0;
 }
+
 .logo{
   color:#fff8e7;
 }
+
 .link{
   color:#013220;
 }
+
 form input, textarea {
   margin: 0.5rem 0;
   background-color: #fff8e7;
@@ -179,9 +190,11 @@ form input, textarea {
   border-radius: 5px;
   padding: 10px;
 }
+
 label{
   color: #013220;
 }
+
 .form-text{
   color:#013220;
   text-align: center;
@@ -204,17 +217,21 @@ a.form-button{
   margin-left: 10px;
   cursor: pointer;
 }
+
 .review{
   border-bottom: 1px solid #ccc;
   margin: 0px;
   padding: 5% 0%;
 }
+
 .review-header{
   margin-bottom: 40px;
 }
+
 .profile-text{
   margin-bottom: 10px;
 }
+
 .profile{
   background-color: #f9e8c7;
   display: flex;
@@ -222,29 +239,38 @@ a.form-button{
   margin: 5rem auto;
   padding: 50px 100px;
 }
+
 .profile-info{
   width: 70%;
 }
+
 .page-header{
   border-bottom: 1px solid #013220;
   padding-bottom: 10px;
   margin: 5rem 3rem 30px 3rem;
+  color: #013220;
 }
+
 .comment{
-  margin-top:5px
+  margin-top:5px;
+  color: #013220;
 }
+
 .profile-username{
   margin: 0px 0px 20px 0px;
   padding-bottom: 10px;
 }
+
 .review-header{
   margin: 0px;
 }
+
 .review-form{
   width: 80%;
   margin: 20px 0px;
   padding: 5% 10%;
 }
+
 .star{
   font-size: 20px;
 }
@@ -252,10 +278,13 @@ a.form-button{
 input[type="text"], textarea, ::placeholder {
   font-family: Arial, Helvetica, sans-serif;
 }
+
 .title{
   font-size: 14px;
   margin-bottom: 5px;
+  color: #013220;
 }
+
 :-ms-input-placeholder {
   font-family: Arial, Helvetica, sans-serif;
 }
@@ -263,23 +292,30 @@ input[type="text"], textarea, ::placeholder {
 ::-ms-input-placeholder {
   font-family: Arial, Helvetica, sans-serif;
 }
+
 h1{
   margin: 10px 0px;
+  color: #013220;
 }
+
 p{
   margin-top: 0px;
+  color: #013220;
 }
+
+em{
+  color: #013220;
+}
+
 .menu{
   display: flex;
   margin: 3rem;
 }
+
 .switch {
   position: relative;
   width: 55px;
   height: 25px;
-  /* float: right;
-  right: 50px;
-  top: 0px; */
 }
 
 .switch input {
@@ -338,9 +374,11 @@ input:checked + .slider:before {
   text-align: center;
   margin-top: 3rem;
 }
+
 .editMode{
   display: block;
 }
+
 .normalMode{
   display: none;
 }
@@ -355,6 +393,7 @@ input:checked + .slider:before {
   width: auto;
   float: right;
 }
+
 .edit{
   float: left;
 }
@@ -372,24 +411,29 @@ input:checked + .slider:before {
   width: 70%;
   margin: 45px auto;
 }
+
 .error{
   text-align: center;
 }
+
 .error-message{
   color: rgb(221, 1, 1);
   margin: 10px;
 }
+
 .search{
   width: 100%;
 }
+
 .input-search{
   width: 95%;
   padding: 5px;
   border-radius: 0px 5px 5px 0px;
   background: transparent;
   border: 1px solid #013220;
-  color: white;
+  color: #013220;
 }
+
 .filter{
   width: 100px;
   font-size: 12px;
@@ -400,6 +444,7 @@ input:checked + .slider:before {
   color: #f9e8c7;
   background-color:#013220;
 }
+
 .profile-buttons{
   margin-top: 15px;
 }

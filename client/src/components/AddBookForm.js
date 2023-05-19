@@ -64,6 +64,7 @@ function AddBookForm() {
                     value={formData.title}
                     className="form-input"
                     placeholder="Title"
+                    autoComplete="off"
                     />
                     <input 
                     type="text" 
@@ -72,6 +73,7 @@ function AddBookForm() {
                     value={formData.author}
                     className="form-input"
                     placeholder="author"
+                    autoComplete="off"
                     />
                     <input 
                     type="text" 
@@ -80,6 +82,7 @@ function AddBookForm() {
                     value={formData.genre}
                     className="form-input"
                     placeholder="genre"
+                    autoComplete="off"
                     />
                     <textarea 
                     name="summary" 
@@ -87,6 +90,7 @@ function AddBookForm() {
                     value={formData.summary}
                     className="form-textarea"
                     placeholder="summary"
+                    autoComplete="off"
                     >
                     </textarea>
                     <input 
@@ -96,6 +100,7 @@ function AddBookForm() {
                     value={formData.page_count}
                     className="form-input"
                     placeholder="Page Number"
+                    autoComplete="off"
                     />
                     <input 
                     type="text" 
@@ -104,6 +109,7 @@ function AddBookForm() {
                     value={formData.book_image}
                     placeholder="Enter an Image URL"
                     className="form-input"
+                    autoComplete="off"
                     />
                     <button className="form-button" name="submit" type="submit">Submit</button>
                 </form>

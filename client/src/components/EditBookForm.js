@@ -56,7 +56,7 @@ function EditBookForm({onUpdateBook}) {
                     onChange={handleChangeInput}
                     value={title}
                     className="form-input"
-                    placeholder="Title"
+                    autoComplete="off"
                     />
                     <input 
                     type="text" 
@@ -64,7 +64,7 @@ function EditBookForm({onUpdateBook}) {
                     onChange={handleChangeInput}
                     value={author}
                     className="form-input"
-                    placeholder="author"
+                    autoComplete="off"
                     />
                     <input 
                     type="text" 
@@ -72,14 +72,14 @@ function EditBookForm({onUpdateBook}) {
                     onChange={handleChangeInput}
                     value={genre}
                     className="form-input"
-                    placeholder="genre"
+                    autoComplete="off"
                     />
                     <textarea 
                     name="summary" 
                     onChange={handleChangeInput} 
                     value={summary}
                     className="form-textarea"
-                    placeholder="summary"
+                    autoComplete="off"
                     >
                     </textarea>
                     <input 
@@ -88,14 +88,14 @@ function EditBookForm({onUpdateBook}) {
                     onChange={handleChangeInput}
                     value={page_count}
                     className="form-input"
-                    placeholder="Page Number"
+                    autoComplete="off"
                     />
                     <input 
                     type="text" 
                     name="book_image" 
                     onChange={handleChangeInput} 
                     value={book_image}
-                    placeholder="Enter an Image URL"
+                    autoComplete="off"
                     className="form-input"
                     />
                     <button className="form-button" name="submit" type="submit">Submit</button>
