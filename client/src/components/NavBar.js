@@ -6,33 +6,33 @@ function NavBar() {
     const {user, setUser} = useContext(UserContext)
     function handleLogoutClick() {
         fetch("/logout", { method: "DELETE" }).then((r) => {
-        if (r.ok) {
-            setUser(null);
-        }
+            if (r.ok) {
+                setUser(null);
+            }
         });
     }
 
     return (
         <header>
             {user ? (
-             <Link to="/"><h3 className="navbar logo">Home</h3></Link>
+                <Link to="/"><h3 className="navbar logo">Home</h3></Link>
             ) : (
                 <Link to="/"><h3 className="navbar logo">BookClub</h3></Link>
             )}
-        <div className="navbar">
-            {user ? (
-                <>
-                    <NavLink to="/books/new">Add Book</NavLink>
-                    <NavLink to="/profile">Profile</NavLink>
-                    <button className="logout" onClick={handleLogoutClick}>Logout</button>
-                </>
-            ) : (
-            <>
-                <Link to="/signup">Signup</Link>
-                <Link className="logout" to="/login">Login</Link>
-            </>
-            )}
-        </div>
+            <div className="navbar">
+                {user ? (
+                    <>
+                        <NavLink to="/books/new">Add Book</NavLink>
+                        <NavLink to="/profile">Profile</NavLink>
+                        <button className="logout" onClick={handleLogoutClick}>Logout</button>
+                    </>
+                ) : (
+                    <>
+                        <Link to="/signup">Signup</Link>
+                        <Link className="logout" to="/login">Login</Link>
+                    </>
+                )}
+            </div>
         </header>
     );
 }

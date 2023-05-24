@@ -17,24 +17,8 @@ function App() {
   const {user,setUser} = useContext(UserContext)
   
   const {books, setBooks} = useContext(BookContext)
-  
-  function onAddReview(newReview) {
-    const updatedBooks = books.map(book => {
-      if(book.id === newReview.book_id){
-        return {...book, reviews: [...book.reviews, newReview]}
-      }else{
-        return book
-      }
-    })
-    if(newReview.user_id === user.id){
-      setUser({...user, reviews: [...user.reviews, newReview]})
-    }else{
-      return user
-    }
-    setBooks(updatedBooks)
-  }
 
-  function deleteReview(selectedReview) {
+  function onDeleteReview(selectedReview) {
     const updatedBooks = books.map(book => {
       const match = [...book.reviews].filter(review => review.id !== selectedReview.id)
 
@@ -48,68 +32,7 @@ function App() {
 
     const updatedUserReviews = user.reviews.filter(review => review.id !== selectedReview.id)
     setUser({...user, reviews: updatedUserReviews})
-
-}
-
-const onUpdateReview = (updatedReview) => {   
-    const selectedBook = books.find(book => book.id === updatedReview.book_id)
-    const bookReviews = selectedBook.reviews.map(review => {
-      if(review.id === updatedReview.id){
-        return updatedReview
-      }else{
-        return review
-      }
-    })
-
-    const updatedBook = {...selectedBook, reviews: bookReviews}
-
-    const updatedBookList = books.map(book => {
-      if(book.id === updatedBook.id){
-        return updatedBook
-      }else{
-        return book
-      }
-    })
-   setBooks(updatedBookList)
-
-  const updateUserReview = user.reviews.map(review => {
-    if(review.id === updatedReview.id){
-      return updatedReview
-    }else{
-      return review
-    }
-  })
-  setUser({...user, reviews: updateUserReview})
-}
-
-const onUpdateBook = (updatedBook) => {
-  const updatedList = books.map(book => {
-      if(book.id === updatedBook.id){
-          return updatedBook
-      } else {
-          return book
-      }
-  })
-  setBooks(updatedList)
-
-  const updatedUserBookList = user.reviews.map(review => {
-    if(review.book_id === updatedBook.id){
-        return {...review, book: updatedBook}
-    } else {
-        return {...review, book: review.book}
-    }
-})
-
-  setUser({...user, reviews: updatedUserBookList})
-}
-
-const onDeleteBook = (selectedBook) => {
-  const updatedBooks = books.filter(book => book.id !== selectedBook.id)
-  setBooks(updatedBooks)
-
-  const updatedUserBooks = user.reviews.filter(review => review.book_id !== selectedBook.id)
-  setUser({...user, reviews: updatedUserBooks})
-}
+  }
 
   return (
     <>
@@ -118,22 +41,22 @@ const onDeleteBook = (selectedBook) => {
           {user ? (
             <Switch>
               <Route path="/profile">
-                <Profile deleteReview={deleteReview}/>
+                <Profile onDeleteReview={onDeleteReview}/>
               </Route>
               <Route path="/books/new">
                   <AddBookForm />
               </Route>
               <Route path="/books/:book_id/reviews/:id/edit">
-                  <EditReview onUpdateReview={onUpdateReview}/>
+                  <EditReview />
                 </Route>
                 <Route exact path="/books/:id/edit">
-                  <EditBookForm onUpdateBook={onUpdateBook} />
+                  <EditBookForm />
                 </Route>
                 <Route exact path="/books/:id">
-                  <Book deleteReview={deleteReview} onAddReview={onAddReview}/>
+                  <Book onDeleteReview={onDeleteReview}/>
                 </Route>
               <Route exact path="/">
-                <Home onDeleteBook={onDeleteBook}/>
+                <Home/>
               </Route>
             </Switch>
           ) : (

@@ -3,7 +3,7 @@ import { BookContext } from "../Context/BookContext";
 import BookItem from "./BookItem";
 import Search from "./Search";
 
-function BooksContainer({onDeleteBook}) {
+function BooksContainer() {
     const {books} = useContext(BookContext)
 
     const [search, setSearch] = useState("")
@@ -33,18 +33,17 @@ function BooksContainer({onDeleteBook}) {
             return (roundedAverage === 1)
         }
     })
+
     displayBooks.sort(function(a, b) {
-      if(a.title.toLowerCase() < b.title.toLowerCase()) return -1;
-      if(a.title.toLowerCase() > b.title.toLowerCase()) return 1;
-      return 0;
-     })
+        if(a.title.toLowerCase() < b.title.toLowerCase()) return -1;
+        if(a.title.toLowerCase() > b.title.toLowerCase()) return 1;
+        return 0;
+    })
 
-     function handleFilter(e){
+    function handleFilter(e){
         setFilter(e.target.value)
-      }
+    }
   
-
-
     function handleClick() {
         setIsOn((isOn) => !isOn);
     }
@@ -52,18 +51,18 @@ function BooksContainer({onDeleteBook}) {
 
     return(
         <>
-        <div className="menu">
-        <Search search={search} setSearch={setSearch} handleFilter={handleFilter}/>
-        <label className="switch">
-            <input onClick={handleClick} type="checkbox"/>
-            <span className="slider round"></span>
-        </label>
-        </div>
-        <div className="main">
-            {displayBooks.map(book => (
-                <BookItem key={book.id} book={book} isOn={isOn} onDeleteBook={onDeleteBook}/>
-            ))}
-        </div>
+            <div className="menu">
+                <Search search={search} setSearch={setSearch} handleFilter={handleFilter}/>
+                <label className="switch">
+                    <input onClick={handleClick} type="checkbox"/>
+                    <span className="slider round"></span>
+                </label>
+            </div>
+            <div className="main">
+                {displayBooks.map(book => (
+                    <BookItem key={book.id} book={book} isOn={isOn}/>
+                ))}
+            </div>
         </>
     )
 }

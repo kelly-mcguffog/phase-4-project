@@ -4,18 +4,17 @@ import ReviewContainer from "./ReviewContainer";
 import { BookContext } from "../Context/BookContext"; 
 
 
-function Book({onAddReview, deleteReview}) {
+function Book({onDeleteReview}) {
   const { id } = useParams();
   const {books} = useContext(BookContext)
 
-const book = books.find(book => book.id == id)
+  const book = books.find(book => book.id == id)
 
-if(!book){
-  return <h1>loading</h1>
-}
+  if(!book){
+    return <h1>Not Found</h1>
+  }
 
-
-const { title, author, genre, summary, page_count, book_image } = book;
+  const { title, author, genre, summary, page_count, book_image, reviews } = book;
 
   return (
     <article>
@@ -38,8 +37,7 @@ const { title, author, genre, summary, page_count, book_image } = book;
             </div>
         </div>
         <div className="review-section">
-          <ReviewContainer book={book} onAddReview={onAddReview} deleteReview={deleteReview}/>
-
+          <ReviewContainer reviews={reviews} onDeleteReview={onDeleteReview}/>
         </div>
     </article>
   );

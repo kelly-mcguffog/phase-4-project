@@ -16,14 +16,15 @@ function Signup() {
     password: "",
     passwordConfirmation:""
   }
+
   const [formData, setFormData] = useState(initialState)
   
   function handleChange(event) {
-      setFormData({
-        ...formData,
-        [event.target.name]: event.target.value
-      });
-    }
+    setFormData({
+      ...formData,
+      [event.target.name]: event.target.value
+    });
+  }
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -51,7 +52,7 @@ function Signup() {
             {errors.map((err) => (
             <li key={err}>{err}</li>
             ))}
-      </ul>
+        </ul>
         <input
           type="text"
           id="name"

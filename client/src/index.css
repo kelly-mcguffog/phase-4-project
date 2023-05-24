@@ -302,6 +302,10 @@ p{
   margin-top: 0px;
   color: #013220;
 }
+p.error-message{
+  margin-top: 0px;
+  margin-left: 0px;
+}
 
 em{
   color: #013220;

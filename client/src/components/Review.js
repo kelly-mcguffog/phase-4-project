@@ -1,7 +1,7 @@
 import React from "react";
 import ReviewButtons from "./ReviewButtons";
 
-function Review({review, deleteReview}) {
+function Review({review, onDeleteReview}) {
 
     const {comment, rating, user} = review;
 
@@ -14,7 +14,7 @@ function Review({review, deleteReview}) {
                 <h2 className="comment">{comment}</h2>
                 <p className="star">{"★ ".repeat(rating)}</p>
                 <h5 className="title"><strong>{user.name}</strong></h5>
-                <ReviewButtons deleteReview={deleteReview} review={review}/>
+                <ReviewButtons onDeleteReview={onDeleteReview} review={review}/>
             </div>
         </div>
     )

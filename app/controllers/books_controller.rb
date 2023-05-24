@@ -3,10 +3,6 @@ class BooksController < ApplicationController
         book = Book.all
         render json: book, include: ["reviews", "reviews.user"], status: :ok
     end
-    def show
-        book = Book.find(params[:id])
-        render json: book, status: :ok
-    end
 
     def update
         book = Book.find(params[:id])
