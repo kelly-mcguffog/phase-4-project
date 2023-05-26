@@ -9,6 +9,7 @@ function EditReview() {
   const {user,setUser} = useContext(UserContext)
   const {books, setBooks} = useContext(BookContext)
   const [hover, setHover] = useState(0)
+  const [errors, setErrors] = useState([])
   const history = useHistory()
 
   const book = books.find(book => book.id == book_id)
@@ -65,16 +66,23 @@ function EditReview() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(formData),
+    }).then((r) => {
+      if(r.ok){
+        r.json().then((updatedReview) => onUpdateReview(updatedReview));
+        history.push(`/books/${book_id}`);
+      } else {
+        r.json().then(err => setErrors(err.errors))
+      }
     })
-    .then((r) => r.json())
-    .then((updatedReview) => onUpdateReview(updatedReview));
-    history.push(`/books/${book_id}`);
   }
 
   return (
     <div>
       <form onSubmit={handleEditSubmit}>
         <h1>Edit Review</h1>
+          {errors.map((err) => (
+            <p key={err} className="error-message">{err}</p>
+          ))}
         <textarea
         type="text"
         id="comment"

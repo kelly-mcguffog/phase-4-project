@@ -58,10 +58,11 @@ function EditBookForm() {
         r.json().then((updatedBook) => onUpdateBook(updatedBook));
         history.push(`/books/${id}`);
       } else {
-        r.json().then((err) => setErrors(err));
+        r.json().then((err) => setErrors(err.errors));
       }
     })
   }
+  
   return (
     <div>
       <form className="book-form review-form" onSubmit={handleEditSubmit}>
