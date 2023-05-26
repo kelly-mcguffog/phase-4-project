@@ -1,4 +1,6 @@
 class ReviewsController < ApplicationController
+    before_action :find_review, only: [:update, :destroy]
+
     def index
         render json: Review.all, status: :ok
     end
@@ -9,14 +11,12 @@ class ReviewsController < ApplicationController
     end
 
     def update
-        review = Review.find(params[:id])
-        review.update!(review_params)
-        render json: review, status: :ok
+        @review.update!(review_params)
+        render json: @review, status: :ok
     end
 
     def destroy
-        review = Review.find(params[:id])
-        review.destroy
+        @review.destroy
         head :no_content
     end
 
@@ -24,5 +24,9 @@ class ReviewsController < ApplicationController
 
     def review_params
         params.permit(:comment, :rating, :user_id, :book_id)
+    end
+
+    def find_review
+        @review = Review.find(params[:id])
     end
 end

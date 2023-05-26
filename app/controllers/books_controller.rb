@@ -1,13 +1,14 @@
 class BooksController < ApplicationController
+    before_action :find_book, only: [:update, :destroy]
+
     def index
         book = Book.all
         render json: book, include: ["reviews", "reviews.user"], status: :ok
     end
 
     def update
-        book = Book.find(params[:id])
-        book.update!(book_params)
-        render json: book, include: ["reviews", "reviews.user"], status: :ok
+        @book.update!(book_params)
+        render json: @book, include: ["reviews", "reviews.user"], status: :ok
     end
 
     def create
@@ -15,8 +16,7 @@ class BooksController < ApplicationController
         render json: new_book, status: :created
     end
     def destroy
-        book = Book.find(params[:id])
-        book.destroy
+        @book.destroy
         head :no_content
     end
 
@@ -25,5 +25,9 @@ class BooksController < ApplicationController
 
     def book_params
         params.permit(:title, :genre, :author, :summary, :book_image, :page_count)
+    end
+
+    def find_book
+        @book = Book.find(params[:id])
     end
 end

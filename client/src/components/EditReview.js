@@ -68,8 +68,8 @@ function EditReview() {
       body: JSON.stringify(formData),
     }).then((r) => {
       if(r.ok){
-        r.json().then((updatedReview) => onUpdateReview(updatedReview));
-        history.push(`/books/${book_id}`);
+        r.json().then((updatedReview) => onUpdateReview(updatedReview))
+        history.push(`/books/${book_id}`)
       } else {
         r.json().then(err => setErrors(err.errors))
       }

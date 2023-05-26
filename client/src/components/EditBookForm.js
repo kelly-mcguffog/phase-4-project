@@ -55,14 +55,14 @@ function EditBookForm() {
       body: JSON.stringify(editFormData),
     }).then((r) => {
       if (r.ok) {
-        r.json().then((updatedBook) => onUpdateBook(updatedBook));
-        history.push(`/books/${id}`);
+        r.json().then((updatedBook) => onUpdateBook(updatedBook))
+        history.push(`/books/${id}`)
       } else {
-        r.json().then((err) => setErrors(err.errors));
+        r.json().then((err) => setErrors(err.errors))
       }
     })
   }
-  
+
   return (
     <div>
       <form className="book-form review-form" onSubmit={handleEditSubmit}>
