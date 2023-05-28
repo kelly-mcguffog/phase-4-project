@@ -11,12 +11,6 @@ class UsersController < ApplicationController
         render json: user, include: ["reviews", "reviews.book"], status: :ok
     end
 
-    def destroy
-        user = User.find(params[:id])
-        user.destroy
-        head :no_content
-    end
-
     private
 
     def user_params

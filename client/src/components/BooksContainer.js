@@ -12,12 +12,7 @@ function BooksContainer() {
 
     let displayBooks = books.filter(book => book.title.toLowerCase().includes(search.toLowerCase()))
     displayBooks = displayBooks.filter(book => {
-        const rating = book.reviews.map(review => {
-            return review.rating
-        })
-
-        const avg = rating.reduce((a, b) => a + b, 0) / rating.length
-        const roundedAverage = Math.round(avg)
+        const roundedAverage = book.average_rating
     
         if(filter === "All"){
             return true
@@ -34,6 +29,11 @@ function BooksContainer() {
         }
     })
 
+    // displayBooks.filter(book => {
+    //     if(filter === "All") return true;
+    //     return (book.average_rating === filter)
+    // })
+    
     displayBooks.sort(function(a, b) {
         if(a.title.toLowerCase() < b.title.toLowerCase()) return -1;
         if(a.title.toLowerCase() > b.title.toLowerCase()) return 1;

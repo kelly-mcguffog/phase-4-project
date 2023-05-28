@@ -275,6 +275,10 @@ a.form-button{
   font-size: 20px;
 }
 
+.small-star{
+  font-size: 11px;
+}
+
 input[type="text"], textarea, ::placeholder {
   font-family: Arial, Helvetica, sans-serif;
 }

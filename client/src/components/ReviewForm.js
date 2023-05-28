@@ -40,7 +40,7 @@ function ReviewForm({totalReviews, averageRating, onAddReview}) {
       <form className="review-form" onSubmit={handleSubmit}>
         <h1>Reviews</h1>
         <small>
-          <p>{totalReviews} reviews • {averageRating} rating</p>
+          <p>{totalReviews} reviews • {averageRating} <small className="star small-star">&#9733;</small></p>
         </small>
         <p className="error-message">{errors}</p>
         <textarea

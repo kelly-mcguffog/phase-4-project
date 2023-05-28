@@ -14,7 +14,7 @@ function Book({onDeleteReview}) {
     return <h1>Not Found</h1>
   }
 
-  const { title, author, genre, summary, page_count, book_image, reviews } = book;
+  const { title, author, genre, summary, page_count, book_image, average_rating, reviews } = book;
 
   return (
     <article>
@@ -37,7 +37,7 @@ function Book({onDeleteReview}) {
             </div>
         </div>
         <div className="review-section">
-          <ReviewContainer reviews={reviews} onDeleteReview={onDeleteReview}/>
+          <ReviewContainer reviews={reviews} average_rating={average_rating} onDeleteReview={onDeleteReview}/>
         </div>
     </article>
   );

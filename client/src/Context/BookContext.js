@@ -8,10 +8,8 @@ const BookProvider = ({ children }) => {
         fetch("/books")
         .then(r => r.json())
         .then(book => setBooks(book))
-          
       }, []);
-      
-
+  
   return (
     <BookContext.Provider value={{books, setBooks}}>
         {children}
