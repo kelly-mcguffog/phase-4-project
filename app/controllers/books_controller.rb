@@ -20,7 +20,6 @@ class BooksController < ApplicationController
         head :no_content
     end
 
-
     private
 
     def book_params
