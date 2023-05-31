@@ -2,13 +2,13 @@ class ReviewsController < ApplicationController
     # before_action :user_review, only: [:update, :destroy]
     before_action :authorized, only: [:create, :update, :destroy]
 
-
     def show
         render json: user_review, status: :ok
     end
 
     def create
-        new_review = Review.create!(review_params)
+        current_user = User.find(session[:user_id])
+        new_review = current_user.reviews.create!(review_params)
         render json: new_review, status: :created
     end
 
@@ -25,7 +25,7 @@ class ReviewsController < ApplicationController
     private
 
     def review_params
-        params.permit(:comment, :rating, :user_id, :book_id)
+        params.permit(:comment, :rating, :book_id)
     end
 
     def user_review
