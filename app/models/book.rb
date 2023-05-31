@@ -10,6 +10,4 @@ class Book < ApplicationRecord
     in: GENRE,
     message: "must be one of the following: #{GENRE.join(', ')}"
   }
-
 end
-
