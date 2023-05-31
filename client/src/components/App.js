@@ -46,7 +46,7 @@ function App() {
               <Route path="/books/new">
                   <AddBookForm />
               </Route>
-              <Route path="/books/:book_id/reviews/:id/edit">
+              <Route path="/books/:book_id/reviews/:id">
                   <EditReview />
                 </Route>
                 <Route exact path="/books/:id/edit">

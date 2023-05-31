@@ -1,37 +1,57 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { useParams, useHistory} from "react-router-dom";
 import { UserContext } from "../Context/UserContext";
 import { BookContext } from "../Context/BookContext";
 
 
 function EditReview() {
+  
+  const [formData, setFormData] = useState({
+    comment:'',
+    rating:''
+  })
+
   const {book_id, id} = useParams();
   const {user,setUser} = useContext(UserContext)
   const {books, setBooks} = useContext(BookContext)
   const [hover, setHover] = useState(0)
   const [errors, setErrors] = useState([])
+  const [reviews, setReviews] = useState([])
   const history = useHistory()
 
-  const book = books.find(book => book.id == book_id)
-  const initialState = book.reviews.find(review => review.id == id)
-    
-  const [formData, setFormData] = useState(initialState)
+  useEffect(() => {
+    fetch(`/books/${book_id}/reviews/${id}`)
+    .then(res => res.json())
+    .then(data => setFormData(data))
+  },[])
+
   const {comment, rating} = formData
+  
+  const handleChangeInput = (e) => {
+    setFormData(formData => {
+      return({ 
+        ...formData,
+        [e.target.name]: e.target.value
+      })          
+    })
+  }
 
+  const onUpdateReview = () => {
 
-  const onUpdateReview = (updatedReview) => {   
+    const book = books.find(book => book.id == book_id)
+
     const bookReviews = book.reviews.map(review => {
-      if(review.id === updatedReview.id){
-        return updatedReview
-      }else{
+      if(review.id === formData.id){
+        return formData
+      } else {
         return review
       }
     })
-  
-    const updatedBook = {...book, reviews: bookReviews}
 
+    const updatedBook = {...book, reviews: bookReviews}
+    
     const updatedBookList = books.map(book => {
-      if(book.id === updatedBook.id){
+      if(book.id === formData.book_id){
         return updatedBook
       }else{
         return book
@@ -40,22 +60,13 @@ function EditReview() {
     setBooks(updatedBookList)
   
     const updateUserReview = user.reviews.map(review => {
-      if(review.id === updatedReview.id){
-        return updatedReview
+      if(review.id === formData.id){
+        return formData
       }else{
         return review
       }
     })
     setUser({...user, reviews: updateUserReview})
-  }
-    
-  const handleChangeInput = (e) => {
-    setFormData(editFormData => {
-      return({ 
-        ...editFormData,
-        [e.target.name]: e.target.value
-      })          
-    })
   }
 
   function handleEditSubmit(e) {
@@ -68,7 +79,7 @@ function EditReview() {
       body: JSON.stringify(formData),
     }).then((r) => {
       if(r.ok){
-        r.json().then((updatedReview) => onUpdateReview(updatedReview))
+        r.json().then(onUpdateReview)
         history.push(`/books/${book_id}`)
       } else {
         r.json().then(err => setErrors(err.errors))

@@ -6,6 +6,10 @@ class BooksController < ApplicationController
         render json: book, include: ["reviews", "reviews.user"], status: :ok
     end
 
+    def show
+        render json: find_book, status: :ok
+    end
+
     def update
         @book.update!(book_params)
         render json: @book, include: ["reviews", "reviews.user"], status: :ok
@@ -15,7 +19,7 @@ class BooksController < ApplicationController
         new_book = Book.create!(book_params)
         render json: new_book, status: :created
     end
-    
+
     def destroy
         @book.destroy
         head :no_content

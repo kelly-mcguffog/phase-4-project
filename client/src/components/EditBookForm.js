@@ -1,9 +1,18 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { UserContext } from "../Context/UserContext";
 import { BookContext } from "../Context/BookContext";
 import { useParams, useHistory} from "react-router-dom";
 
 function EditBookForm() {
+
+  const [formData, setFormData] = useState({
+    title:'',
+    author:'',
+    genre:'',
+    summary:'',
+    page_count:'',
+    book_image:''
+  })
 
   const {id} = useParams();
   const {user,setUser} = useContext(UserContext)
@@ -11,10 +20,14 @@ function EditBookForm() {
   const [errors, setErrors] = useState([])
   const history = useHistory();
 
-  const initialState = books.find(book => book.id == id)
-  const [editFormData, setEditFormData] = useState(initialState)
+  useEffect(() => {
+    fetch(`/books/${id}`)
+    .then(res => res.json())
+    .then(setFormData)
+  },[id])
 
-  const {title, author, genre, summary, page_count, book_image} = editFormData
+  const {title, author, genre, summary, page_count, book_image} = formData
+
 
   const onUpdateBook = (updatedBook) => {
     const updatedList = books.map(book => {
@@ -37,9 +50,9 @@ function EditBookForm() {
   }
 
   const handleChangeInput = (e) => {
-    setEditFormData(editFormData => {
+    setFormData(formData => {
       return({ 
-        ...editFormData,
+        ...formData,
         [e.target.name]: e.target.value
       })          
     })
@@ -52,7 +65,7 @@ function EditBookForm() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(editFormData),
+      body: JSON.stringify(formData),
     }).then((r) => {
       if (r.ok) {
         r.json().then((updatedBook) => onUpdateBook(updatedBook))
@@ -68,9 +81,9 @@ function EditBookForm() {
       <form className="book-form review-form" onSubmit={handleEditSubmit}>
         <h1>Edit Book Details</h1>
         <ul className="error-message">
-          {errors.map((err) => (
+          {errors?errors.map((err) => (
             <li key={err}>{err}</li>
-          ))}
+          )): null}
         </ul>
         <input 
         type="text" 
