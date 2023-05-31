@@ -10,22 +10,25 @@ function BooksContainer() {
     const [filter, setFilter] = useState("All")
     const [isOn, setIsOn] = useState(false)
 
+    
     let displayBooks = books.filter(book => book.title.toLowerCase().includes(search.toLowerCase()))
     displayBooks = displayBooks.filter(book => {
-        const roundedAverage = book.average_rating
-    
+        const ratings = book.reviews.map(book => book.rating)
+        const sum_rating = ratings.reduce((sum, num) => sum + num, 0)
+        const average_rating = Math.round(sum_rating/ratings.length)
+
         if(filter === "All"){
             return true
         }else if (filter === "5"){
-            return (roundedAverage === 5)
+            return (average_rating === 5)
         } else if (filter === "4"){
-            return (roundedAverage === 4)
+            return (average_rating === 4)
         }else if(filter === "3"){
-            return (roundedAverage === 3)
+            return (average_rating === 3)
         }else if(filter === "2"){
-            return (roundedAverage === 2)
+            return (average_rating === 2)
         }else{
-            return (roundedAverage === 1)
+            return (average_rating === 1)
         }
     })
 

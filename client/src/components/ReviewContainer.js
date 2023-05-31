@@ -4,11 +4,15 @@ import Review from "./Review";
 import { UserContext } from "../Context/UserContext";
 import { BookContext } from "../Context/BookContext";
 
-function ReviewContainer({reviews, onDeleteReview, average_rating}) {
+function ReviewContainer({reviews, onDeleteReview}) {
 
     const {user,setUser} = useContext(UserContext)
     const {books, setBooks} = useContext(BookContext)
+    const ratings = reviews.map(book => book.rating)
+    const sum_rating = ratings.reduce((sum, num) => sum + num, 0)
     const totalReviews = reviews.length
+    const average_rating = (sum_rating/totalReviews).toFixed(2)
+    
 
 
     function onAddReview(newReview) {
