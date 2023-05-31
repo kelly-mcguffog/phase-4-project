@@ -3,7 +3,7 @@ import { Switch, Route } from "react-router-dom";
 import { UserContext } from "../Context/UserContext";
 import { BookContext } from "../Context/BookContext";
 import Login from "./Login";
-import Signup from "./Signup";
+import SignUp from "./SignUp";
 import NavBar from "./NavBar";
 import Home from "./Home";
 import Book from "./Book";
@@ -62,7 +62,7 @@ function App() {
           ) : (
             <Switch>
               <Route path="/signup">
-                <Signup />
+                <SignUp />
               </Route>
               <Route path="/login">
                 <Login />
