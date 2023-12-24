@@ -1,47 +1,10 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
-
-# user = 10.times do
-#     User.create(
-#         name: Faker::Name.name,
-#         age: Faker::Number.between(from: 2, to: 100),
-#         profile_picture: Faker::Avatar.image,
-#         username: Faker::Internet.username(specifier: 10),
-#         password_digest: Faker::Internet.password
-#     )
-# end
-
-# book = 50.times do 
-#     Book.create(
-#         title: Faker::Book.title,
-#         genre: Faker::Book.genre,
-#         author: Faker::Book.author,
-#         summary: Faker::Lorem.paragraph,
-#         book_image: Faker::Placeholdit.image(size: '50x50'),
-#         page_count: Faker::Number.between(from: 20, to: 300)
-#     )
-# end
-    
-# rand(5..10).times do
-#     Review.create(
-#         comment: Faker::Lorem.paragraph,
-#         rating: Faker::Number.between(from: 0, to: 5),
-#         user_id: user.id,
-#         book_id: book.id
-#     )
-# end
-
 user1 = User.create(
     name: "Kelly McGuffog",
     age: 27,
     profile_picture: "https://media.licdn.com/dms/image/C5603AQG1PaFZV3kX3Q/profile-displayphoto-shrink_800_800/0/1585589794183?e=2147483647&v=beta&t=BO8_Mx48KEXWxuOSZWe2GNujsoYH8A11I84XUp75754",
     username: "kelly.mcguffog",
-    password_digest: "Sports123"
+    password: "Sports123",
+    password_confirmation: "Sports123"
 )
 
 user2 = User.create(
@@ -49,7 +12,8 @@ user2 = User.create(
     age: 32,
     profile_picture: "https://media.licdn.com/dms/image/C4E03AQEtCHaKDXeT1g/profile-displayphoto-shrink_800_800/0/1659899854745?e=1687996800&v=beta&t=v3CZK_GPGSw3ke5obdALFzOm70vrG8IlHbdFMg7uA7I",
     username: "ilyssa.rudman",
-    password_digest: "Hampton123"
+    password: "Hampton123",
+    password_confirmation: "Hampton123"
 )
 
 user3 = User.create(
@@ -57,7 +21,8 @@ user3 = User.create(
     age: 59,
     profile_picture: "https://media.licdn.com/dms/image/C4E03AQGhbLpNLJJwlg/profile-displayphoto-shrink_800_800/0/1543949939456?e=2147483647&v=beta&t=aIAy9DKUKivRr8zJ1aCuqUeAa3J1vRGDkz7tdOM3uw8",
     username: "roni.kamin",
-    password_digest: "Windham123"
+    password: "Windham123",
+    password_confirmation: "Windham123"
 )
 
 user4 = User.create(
@@ -65,7 +30,8 @@ user4 = User.create(
     age: 29,
     profile_picture: "https://media.licdn.com/dms/image/C4D03AQGXp856Bgz9qg/profile-displayphoto-shrink_800_800/0/1613081730507?e=1687996800&v=beta&t=m-ldt2dXdZ3DvtsMF5CgZmDk8ZYIGPLCqqxbTdZKfWQ",
     username: "jared.gropper",
-    password_digest: "Callie123"
+    password: "Callie123",
+    password_confirmation: "Callie123"
 )
 
 user5 = User.create(
@@ -73,7 +39,8 @@ user5 = User.create(
     age: 29,
     profile_picture: "https://media.licdn.com/dms/image/C4E03AQH3cfEmTa7CcA/profile-displayphoto-shrink_800_800/0/1602861584485?e=1687996800&v=beta&t=bwTFqSMq47zaKEiQpuyJbPrllY7bT0lOAGzKUQCi1gc",
     username: "matt.weinberg",
-    password_digest: "Jets123"
+    password: "Jets123",
+    password_confirmation: "Jets123"
 )
 
 
