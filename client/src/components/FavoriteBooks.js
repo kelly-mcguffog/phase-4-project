@@ -3,7 +3,7 @@ import { Link} from "react-router-dom";
 
 const FavoriteBooks = ({ name, topReviews }) => (
     <div>
-      <h3 className="page-header">{name}'s Favorite Books</h3>
+      <h2 className="page-header">{name}'s Favorite Books</h2>
       <div className="favorites">
         {topReviews.map((review) => (
           <div className="books favorite-books" key={review.id}>

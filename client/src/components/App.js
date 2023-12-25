@@ -6,7 +6,7 @@ import Login from "./Login";
 import SignUp from "./SignUp";
 import NavBar from "./NavBar";
 import Home from "./Home";
-import Book from "./Book";
+import BookDetails from "./BookDetails";
 import Profile from "./Profile";
 import EditReview from "./EditReview";
 import AddBookForm from "./AddBookForm";
@@ -53,7 +53,7 @@ function App() {
                   <EditBookForm />
                 </Route>
                 <Route exact path="/books/:id">
-                  <Book onDeleteReview={onDeleteReview}/>
+                  <BookDetails onDeleteReview={onDeleteReview}/>
                 </Route>
               <Route exact path="/">
                 <Home/>

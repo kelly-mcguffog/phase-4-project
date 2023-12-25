@@ -2,7 +2,7 @@ import React, {useContext} from "react";
 import { UserContext } from "../Context/UserContext";
 import UserProfileDetails from "./UserProfileDetails";
 import FavoriteBooks from "./FavoriteBooks";
-import BookReview from "./BookReview";
+import MyBookReview from "./MyBookReview";
 
 function Profile({ onDeleteReview }) {
     const { user } = useContext(UserContext);
@@ -14,9 +14,9 @@ function Profile({ onDeleteReview }) {
         <UserProfileDetails name={name} username={username} age={age} profile_picture={profile_picture} />
         <FavoriteBooks name={name} topReviews={topReviews} />
         <div className="review-section">
-          <h3 className="page-header review-header">{name}'s Book Reviews</h3>
+          <h2 className="page-header review-header">{name}'s Book Reviews</h2>
           {user.reviews.map((review) => (
-            <BookReview key={review.id} review={review} onDeleteReview={onDeleteReview} />
+            <MyBookReview key={review.id} review={review} onDeleteReview={onDeleteReview} />
           ))}
         </div>
       </>
