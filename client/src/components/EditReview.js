@@ -1,23 +1,20 @@
 import React, { useState, useContext, useEffect } from "react";
-import { useParams, useHistory} from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { UserContext } from "../Context/UserContext";
 import { BookContext } from "../Context/BookContext";
 
-
 function EditReview() {
-  
   const [formData, setFormData] = useState({
-    comment:'',
-    rating:''
-  })
+    comment: "",
+    rating: "",
+  });
 
-  const {book_id, id} = useParams();
-  const {user,setUser} = useContext(UserContext)
-  const {books, setBooks} = useContext(BookContext)
-  const [hover, setHover] = useState(0)
-  const [errors, setErrors] = useState([])
-  // const [reviews, setReviews] = useState([])
-  const history = useHistory()
+  const { book_id, id } = useParams();
+  const { user, setUser } = useContext(UserContext);
+  const { books, setBooks } = useContext(BookContext);
+  const [hover, setHover] = useState(0);
+  const [errors, setErrors] = useState([]);
+  const history = useHistory();
 
   useEffect(() => {
     fetch(`/books/${book_id}/reviews/${id}`)
@@ -25,51 +22,44 @@ function EditReview() {
       .then((data) => setFormData(data));
   }, [book_id, id]);
 
-  const {comment, rating} = formData
-  
+  const { comment, rating } = formData;
+
   const handleChangeInput = (e) => {
-    setFormData(formData => {
-      return({ 
-        ...formData,
-        [e.target.name]: e.target.value
-      })          
-    })
-  }
+    setFormData((formData) => ({
+      ...formData,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const updateArrayObject = (array, objectId, updatedObject) =>
+    array.map((item) => (item.id === objectId ? updatedObject : item));
 
   const onUpdateReview = () => {
+    const book = books.find((book) => book.id === parseInt(book_id));
+    const bookReviews = updateArrayObject(
+      book.reviews,
+      formData.id,
+      formData
+    );
 
-    const book = books.find(book => book.id === parseInt(book_id))
+    const updatedBook = { ...book, reviews: bookReviews };
+    const updatedBookList = updateArrayObject(
+      books,
+      formData.book_id,
+      updatedBook
+    );
 
-    const bookReviews = book.reviews.map(review => {
-      if(review.id === formData.id){
-        return formData
-      } else {
-        return review
-      }
-    })
+    setBooks(updatedBookList);
 
-    const updatedBook = {...book, reviews: bookReviews}
-    
-    const updatedBookList = books.map(book => {
-      if(book.id === formData.book_id){
-        return updatedBook
-      }else{
-        return book
-      }
-    })
-    setBooks(updatedBookList)
-  
-    const updateUserReview = user.reviews.map(review => {
-      if(review.id === formData.id){
-        return formData
-      }else{
-        return review
-      }
-    })
-    setUser({...user, reviews: updateUserReview})
-  }
+    const updateUserReview = updateArrayObject(
+      user.reviews,
+      formData.id,
+      formData
+    );
+    setUser({ ...user, reviews: updateUserReview });
+  };
 
-  function handleEditSubmit(e) {
+  const handleEditSubmit = (e) => {
     e.preventDefault();
     fetch(`/books/${book_id}/reviews/${id}`, {
       method: "PATCH",
@@ -78,54 +68,62 @@ function EditReview() {
       },
       body: JSON.stringify(formData),
     }).then((r) => {
-      if(r.ok){
-        r.json().then(onUpdateReview)
-        history.push(`/books/${book_id}`)
+      if (r.ok) {
+        r.json().then(onUpdateReview);
+        history.push(`/books/${book_id}`);
       } else {
-        r.json().then(err => setErrors(err.errors))
+        r.json().then(handleErrors);
       }
-    })
-  }
+    });
+  };
+
+  const handleErrors = (err) => {
+    setErrors(err.errors);
+  };
 
   return (
     <div>
       <form onSubmit={handleEditSubmit}>
         <h1>Edit Review</h1>
-          {errors.map((err) => (
-            <p key={err} className="error-message">{err}</p>
-          ))}
+        {errors.map((err) => (
+          <p key={err} className="error-message">
+            {err}
+          </p>
+        ))}
         <textarea
-        type="text"
-        id="comment"
-        autoComplete="off"
-        name="comment"
-        value={comment}
-        onChange={handleChangeInput}
+          type="text"
+          id="comment"
+          autoComplete="off"
+          name="comment"
+          value={comment}
+          onChange={handleChangeInput}
         />
         <div className="star-rating">
           {[...Array(5)].map((star, index) => {
             index += 1;
-            return(
+            return (
               <button
-              type="button"
-              key={index}
-              name="rating"
-              value={index}
-              className={index <= (( hover) || rating) ? "on" : "off"}
-              onClick={(handleChangeInput)}
-              onMouseEnter={() => setHover(index)}
-              onMouseLeave={() => setHover(rating)}
+                type="button"
+                key={index}
+                name="rating"
+                value={index}
+                className={index <= hover || index <= rating ? "on" : "off"}
+                onClick={handleChangeInput}
+                onMouseEnter={() => setHover(index)}
+                onMouseLeave={() => setHover(rating)}
               >
                 <span className="star">&#9733;</span>
               </button>
             );
           })}
+
         </div>
-        <button className="form-button" name="submit" type="submit">Submit</button>
+        <button className="form-button" name="submit" type="submit">
+          Submit
+        </button>
       </form>
     </div>
   );
 }
-
 
 export default EditReview;
