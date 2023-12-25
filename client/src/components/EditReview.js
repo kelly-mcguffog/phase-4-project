@@ -16,14 +16,14 @@ function EditReview() {
   const {books, setBooks} = useContext(BookContext)
   const [hover, setHover] = useState(0)
   const [errors, setErrors] = useState([])
-  const [reviews, setReviews] = useState([])
+  // const [reviews, setReviews] = useState([])
   const history = useHistory()
 
   useEffect(() => {
     fetch(`/books/${book_id}/reviews/${id}`)
-    .then(res => res.json())
-    .then(data => setFormData(data))
-  },[])
+      .then((res) => res.json())
+      .then((data) => setFormData(data));
+  }, [book_id, id]);
 
   const {comment, rating} = formData
   
@@ -38,7 +38,7 @@ function EditReview() {
 
   const onUpdateReview = () => {
 
-    const book = books.find(book => book.id == book_id)
+    const book = books.find(book => book.id === parseInt(book_id))
 
     const bookReviews = book.reviews.map(review => {
       if(review.id === formData.id){

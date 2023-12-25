@@ -1,9 +1,11 @@
-import React, {useContext} from "react";
+import React, {useContext, useState} from "react";
 import { UserContext } from "../Context/UserContext";
 import { Link, NavLink } from "react-router-dom";
 
 function NavBar() {
     const {user, setUser} = useContext(UserContext)
+    const [isMobile, setIsMobile] = useState(false);
+
     function handleLogoutClick() {
         fetch("/logout", { method: "DELETE" }).then((r) => {
             if (r.ok) {
@@ -12,26 +14,32 @@ function NavBar() {
         });
     }
 
+    function handleMobile() {
+        setIsMobile((isMobile) => !isMobile);
+    }
+
     return (
-        <header>
+        <header id="navbar">
             {user ? (
-                <Link to="/"><h3 className="navbar logo">Home</h3></Link>
+                <Link to="/"><h3 className="logo">Home</h3></Link>
             ) : (
-                <Link to="/"><h3 className="navbar logo">BookClub</h3></Link>
+                <Link to="/"><h3 className="logo">BookClub</h3></Link>
             )}
-            <div className="navbar">
                 {user ? (
-                    <>
+                    <div id="navbar-right" className={isMobile ? "active" : "inactive"}>
+
                         <NavLink to="/books/new">Add Book</NavLink>
                         <NavLink to="/profile">Profile</NavLink>
                         <button className="logout" onClick={handleLogoutClick}>Logout</button>
-                    </>
+                    </div>
                 ) : (
                     <>
                         <Link to="/signup">Signup</Link>
                         <Link className="logout" to="/login">Login</Link>
                     </>
                 )}
+            <div id="mobile" onClick={handleMobile}>
+                    <i id="bar" className={isMobile ? "fa-solid fa-times" : "fa-solid fa-bars"}></i>
             </div>
         </header>
     );
