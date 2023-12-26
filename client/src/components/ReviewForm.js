@@ -45,16 +45,20 @@ function ReviewForm({ totalReviews, averageRating, onAddReview }) {
   };
 
   return (
-    <div>
-      <form className="review-form" onSubmit={handleSubmit}>
-        <h1>Reviews</h1>
+    <div className="form">
+      <form onSubmit={handleSubmit}>
+        <h1 className="form-text">Reviews</h1>
         <small>
           <p>
             {totalReviews} reviews • {averageRating}{" "}
             <small className="star small-star">&#9733;</small>
           </p>
         </small>
-        <p className="error-message">{errors}</p>
+        {errors.length > 0 && (
+          <p className="error-message">
+            {errors}
+          </p>
+        )}
         <textarea
           type="text"
           id="comment"

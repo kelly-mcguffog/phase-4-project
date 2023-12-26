@@ -33,12 +33,9 @@ function NavBar() {
                         <button className="logout" onClick={handleLogoutClick}>Logout</button>
                     </div>
                 ) : (
-                    <>
-                        <Link to="/signup">Signup</Link>
-                        <Link className="logout" to="/login">Login</Link>
-                    </>
+                    <></>
                 )}
-            <div id="mobile" onClick={handleMobile}>
+            <div id={user ? "mobile" : "desktop"} onClick={handleMobile}>
                     <i id="bar" className={isMobile ? "fa-solid fa-times" : "fa-solid fa-bars"}></i>
             </div>
         </header>

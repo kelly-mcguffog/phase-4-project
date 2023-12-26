@@ -2,7 +2,7 @@ import React from "react";
 import { Link} from "react-router-dom";
 
 const FavoriteBooks = ({ name, topReviews }) => (
-    <div>
+    <div className="profile-details">
       <h2 className="page-header">{name}'s Favorite Books</h2>
       <div className="favorites">
         {topReviews.map((review) => (

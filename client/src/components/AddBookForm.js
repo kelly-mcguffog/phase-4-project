@@ -47,14 +47,16 @@ function AddBookForm() {
     });
   }
   return (
-    <div>
-      <form className="book-form review-form" onSubmit={handleSubmit}>
-        <h1>Add to Our Collection</h1>
-        <ul className="error-message">
-          {errors.map((err) => (
-            <li key={err}>{err}</li>
-          ))}
-        </ul>
+    <div className="form">
+      <form onSubmit={handleSubmit}>
+        <h1 className="form-text">Add to Our Collection</h1>
+        {errors.length > 0 && (
+          <ul className="error-message">
+            {errors.map((err) => (
+              <li key={err}>{err}</li>
+            ))}
+          </ul>
+        )}
         <input 
         type="text" 
         name="title" 

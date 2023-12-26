@@ -77,14 +77,16 @@ function EditBookForm() {
   }
 
   return (
-    <div>
-      <form className="book-form review-form" onSubmit={handleEditSubmit}>
+    <div className="form">
+      <form onSubmit={handleEditSubmit}>
         <h1>Edit Book Details</h1>
-        <ul className="error-message">
-          {errors?errors.map((err) => (
-            <li key={err}>{err}</li>
-          )): null}
-        </ul>
+        {errors.length > 0 && (
+          <ul className="error-message">
+            {errors.map((err) => (
+              <li key={err}>{err}</li>
+            ))}
+          </ul>
+        )}
         <input 
         type="text" 
         name="title" 

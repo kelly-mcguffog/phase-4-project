@@ -41,11 +41,13 @@ function Login() {
   }
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <h1 className="form-text head">Login</h1>
-        <h3 className="form-text subhead">Enter your details to sign in to your account.</h3>
-        <p className="error-message error">{errors}</p>
+    <div className="form">
+      <form className="login-form" onSubmit={handleSubmit}>
+        <h1 className="form-text">Login</h1>
+        <h3 className="form-text">Enter your details to sign in to your account.</h3>
+        {errors.length > 0 && (
+          <p className="error-message error">{errors}</p>
+        )}
         <input
           type="text"
           id="username"

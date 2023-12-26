@@ -7,6 +7,10 @@ body {
 
 }
 
+#desktop{
+  display: none;
+}
+
 code {
   font-family: Arial, Helvetica, sans-serif;
 }
@@ -65,6 +69,9 @@ main{
   width: 85%;
   margin: 50px auto;
   row-gap: 50px;
+
+
+  align-items: center;
 }
 .main {
   display: flex;
@@ -79,9 +86,10 @@ main{
   flex-wrap: wrap;
   display: flex;
   column-gap: 30px;
+  row-gap: 30px;
 }
-#profile-details{
-  margin-top: 50px;
+.profile-details{
+  width: 100%;
 }
 .details{
   display: flex;
@@ -174,25 +182,45 @@ main{
   color: #ccc;
 }
 
-form {
+.form{
   background-color: #f9e8c7;
+  width: 100%;
+}
+form{
   display: flex;
   flex-direction: column;
-  width: 400px;
-  margin: 5rem auto;
-  padding: 50px 100px;
+  align-items: flex-start;
+  width: 85%;
+  margin: 30px auto;
+  row-gap: 10px;
+}
+.login-form{
+  align-items: center;
+}
+article{
+  display: flex;
+  row-gap: 50px;
+  flex-direction: column;
+  width: 100%;
+}
+.form-text{
+  margin: 0;
+  color:#013220;
+  text-align: center;
 }
 
-.form-text.head{
-  margin: 0px;
+input, textarea{
+  margin: 0;
+  width: 100%;
+  padding: 5px;
+  background-color: #fff8e7;
+  border: 0.5px solid #013220;
+  border-radius: 5px;
 }
 
-.form-text.subhead{
-  font-size: 16px;
-  font-weight: 300;
-  margin-bottom: 0;
+textarea{
+  height: 100px;
 }
-
 .logo{
   color:#fff8e7;
   margin: 0px 1rem;
@@ -202,21 +230,8 @@ form {
   color:#013220;
 }
 
-form input, textarea {
-  margin: 0.5rem 0;
-  background-color: #fff8e7;
-  border: 0.5px solid #013220;
-  border-radius: 5px;
-  padding: 10px;
-}
-
 label{
   color: #013220;
-}
-
-.form-text{
-  color:#013220;
-  text-align: center;
 }
 
 button.form-button, a.form-button{
@@ -228,15 +243,10 @@ button.form-button, a.form-button{
   border: none;
   font-size: 14px;
   cursor: pointer;
-}
-
-a.form-button{
+  width: 100%;
+  text-align: center;
   text-decoration: none;
-  padding: 10px 20px;
-  margin-left: 10px;
-  cursor: pointer;
 }
-
 .review{
   border-bottom: 1px solid #ccc;
   margin: 0px;
@@ -282,13 +292,6 @@ a.form-button{
 .review-header{
   margin: 0px;
 }
-
-.review-form{
-  width: 80%;
-  margin: 20px 0px;
-  padding: 5% 10%;
-}
-
 .star{
   font-size: 20px;
 }
@@ -336,6 +339,7 @@ em{
 .menu{
   display: flex;
   align-items: center;
+  width: 100%;
 }
 
 .switch {
@@ -433,11 +437,6 @@ input:checked + .slider:before {
   cursor: pointer;
 }
 
-.book-form{
-  width: 70%;
-  margin: 45px auto;
-}
-
 .error{
   text-align: center;
 }
@@ -473,6 +472,10 @@ input:checked + .slider:before {
 
 .profile-buttons{
   margin-top: 15px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  column-gap: 30px;
 }
 
 .fa-circle-xmark, .fa-pen-to-square{

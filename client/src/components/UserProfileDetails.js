@@ -1,7 +1,7 @@
 import React from "react";
 
 const UserProfileDetails = ({ name, username, age, profile_picture }) => (
-  <div id="profile-details" className="details">
+  <div className="profile-details details">
     <div className="image-cropper profile-cropper">
       <img className="profile-image" src={profile_picture} alt={name} />
     </div>

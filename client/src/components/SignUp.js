@@ -44,15 +44,17 @@ function SignUp() {
     });
   }
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
+    <div className="form">
+      <form className="login-form" onSubmit={handleSubmit}>
       <h1 className="form-text head">Sign Up</h1>
         <h3 className="form-text subhead">Enter your details to create an account.</h3>
-        <ul className="error-message">
+        {errors.length > 0 && (
+          <ul className="error-message">
             {errors.map((err) => (
-            <li key={err}>{err}</li>
+              <li key={err}>{err}</li>
             ))}
-        </ul>
+          </ul>
+        )}
         <input
           type="text"
           id="name"

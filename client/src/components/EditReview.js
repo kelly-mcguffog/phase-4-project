@@ -82,14 +82,16 @@ function EditReview() {
   };
 
   return (
-    <div>
+    <div className="form">
       <form onSubmit={handleEditSubmit}>
-        <h1>Edit Review</h1>
-        {errors.map((err) => (
-          <p key={err} className="error-message">
-            {err}
-          </p>
-        ))}
+        <h1 className="form-text">Edit Review</h1>
+        {errors.length > 0 && (
+          <ul className="error-message">
+            {errors.map((err) => (
+              <li key={err}>{err}</li>
+            ))}
+          </ul>
+        )}
         <textarea
           type="text"
           id="comment"
