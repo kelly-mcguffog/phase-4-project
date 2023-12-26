@@ -105,7 +105,7 @@ romance2 = Book.create(
     genre: "Romance",
     author: "John Green",
     summary: "Despite the tumor-shrinking medical miracle that has bought her a few years, Hazel has never been anything but terminal, her final chapter inscribed upon diagnosis. But when a gorgeous plot twist named Augustus Waters suddenly appears at Cancer Kid Support Group, Hazel's story is about to be completely rewritten.",
-    book_image: "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1557789859i/45735030.jpg",
+    book_image: "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1660273739i/11870085.jpg",
     page_count: 313
 )
 
