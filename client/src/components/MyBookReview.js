@@ -21,8 +21,10 @@ function MyBookReview ({ review, onDeleteReview }){
         <h5 className="author">
           <em>{author}</em>
         </h5>
-        <ReviewButtons onDeleteReview={onDeleteReview} review={review} />
       </div>
+      <div className="review-menu">
+                <ReviewButtons onDeleteReview={onDeleteReview} review={review}/>
+            </div>
     </div>
     )
 }

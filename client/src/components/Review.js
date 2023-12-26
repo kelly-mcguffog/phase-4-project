@@ -15,6 +15,8 @@ function Review({review, onDeleteReview}) {
                 <h3 className="comment">{comment}</h3>
                 <p className="star">{"★ ".repeat(rating)}</p>
                 <h5 className="title"><strong>{name}</strong></h5>
+            </div>
+            <div className="review-menu">
                 <ReviewButtons onDeleteReview={onDeleteReview} review={review}/>
             </div>
         </div>
