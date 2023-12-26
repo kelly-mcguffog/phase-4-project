@@ -20,11 +20,7 @@ function NavBar() {
 
     return (
         <header id="navbar">
-            {user ? (
-                <Link to="/"><h3 className="logo">Home</h3></Link>
-            ) : (
                 <Link to="/"><h3 className="logo">BookClub</h3></Link>
-            )}
                 {user ? (
                     <div id="navbar-right" className={isMobile ? "active" : "inactive"}>
 

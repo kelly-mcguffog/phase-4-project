@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { BookContext } from "../Context/BookContext";
-import { useHistory} from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 function AddBookForm() {
 
@@ -14,7 +14,7 @@ function AddBookForm() {
   }
 
   const [formData, setFormData] = useState(initialState)
-  const {books, setBooks} = useContext(BookContext)
+  const { books, setBooks } = useContext(BookContext)
   const [errors, setErrors] = useState([])
   const history = useHistory()
 
@@ -57,59 +57,61 @@ function AddBookForm() {
             ))}
           </ul>
         )}
-        <input 
-        type="text" 
-        name="title" 
-        onChange={handleChange}
-        value={formData.title}
-        className="form-input"
-        placeholder="Title"
-        autoComplete="off"
+        <input
+          type="text"
+          name="title"
+          onChange={handleChange}
+          value={formData.title}
+          className="form-input"
+          placeholder="Title"
+          autoComplete="off"
         />
-        <input 
-        type="text" 
-        name="author" 
-        onChange={handleChange}
-        value={formData.author}
-        className="form-input"
-        placeholder="author"
-        autoComplete="off"
+        <input
+          type="text"
+          name="author"
+          onChange={handleChange}
+          value={formData.author}
+          className="form-input"
+          placeholder="author"
+          autoComplete="off"
         />
-        <input 
-        type="text" 
-        name="genre" 
-        onChange={handleChange}
-        value={formData.genre}
-        className="form-input"
-        placeholder="genre"
-        autoComplete="off"
-        />
-        <textarea 
-        name="summary" 
-        onChange={handleChange} 
-        value={formData.summary}
-        className="form-textarea"
-        placeholder="summary"
-        autoComplete="off"
+        <select className="form-input" name="genre" value={formData.genre} onChange={handleChange}>
+          <option value="Action & Adventure">Action & Adventure</option>
+          <option value="Mystery">Mystery</option>
+          <option value="Thriller">Thriller</option>
+          <option value="Historical Fiction">Historical Fiction</option>
+          <option value="Horror">Horror</option>
+          <option value="Romance">Romance</option>
+          <option value="Short Story">Short Story</option>
+          <option value="Memoir">Memoir</option>
+          <option value="Children">Children</option>
+        </select>
+        <textarea
+          name="summary"
+          onChange={handleChange}
+          value={formData.summary}
+          className="form-textarea"
+          placeholder="summary"
+          autoComplete="off"
         >
         </textarea>
-        <input 
-        type="text" 
-        name="page_count" 
-        onChange={handleChange}
-        value={formData.page_count}
-        className="form-input"
-        placeholder="Page Number"
-        autoComplete="off"
+        <input
+          type="text"
+          name="page_count"
+          onChange={handleChange}
+          value={formData.page_count}
+          className="form-input"
+          placeholder="Page Number"
+          autoComplete="off"
         />
-        <input 
-        type="text" 
-        name="book_image" 
-        onChange={handleChange} 
-        value={formData.book_image}
-        placeholder="Enter an Image URL"
-        className="form-input"
-        autoComplete="off"
+        <input
+          type="text"
+          name="book_image"
+          onChange={handleChange}
+          value={formData.book_image}
+          placeholder="Enter an Image URL"
+          className="form-input"
+          autoComplete="off"
         />
         <button className="form-button" name="submit" type="submit">Submit</button>
       </form>

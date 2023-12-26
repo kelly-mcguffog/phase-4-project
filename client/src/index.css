@@ -239,8 +239,9 @@ form{
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  width: 85%;
-  margin: 30px auto;
+  /* width: 85%;
+  margin: 30px auto; */
+  margin: 30px;
   row-gap: 10px;
 }
 .login-form{
@@ -258,10 +259,11 @@ article{
   text-align: center;
 }
 
-input, textarea{
+input, textarea, select.form-input{
   margin: 0;
   width: 100%;
-  padding: 5px;
+  /* padding: 15px; */
+  padding: 15px 0px;
   background-color: #fff8e7;
   border: 0.5px solid #013220;
   border-radius: 5px;
@@ -509,7 +511,7 @@ input:checked + .slider:before {
 }
 
 .filter{
-  width: 100px;
+  width: 120px;
   font-size: 12px;
   padding: 15px;
   border-radius: 5px 0px 0px 5px;
