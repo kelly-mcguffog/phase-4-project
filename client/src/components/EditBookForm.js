@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import { UserContext } from "../Context/UserContext";
 import { BookContext } from "../Context/BookContext";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 function EditBookForm() {
 
@@ -9,7 +9,7 @@ function EditBookForm() {
   const { user, setUser } = useContext(UserContext)
   const { books, setBooks } = useContext(BookContext)
   const [errors, setErrors] = useState([])
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     title: "",
@@ -114,7 +114,7 @@ function EditBookForm() {
     })
     .then((updatedBook) => {
       onUpdateBook(updatedBook)
-      history.push(`/books/${id}`)
+      navigate(`/books/${id}`)
     })
 };
 

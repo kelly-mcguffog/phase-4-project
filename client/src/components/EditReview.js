@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { UserContext } from "../Context/UserContext";
 import { BookContext } from "../Context/BookContext";
 
@@ -14,7 +14,7 @@ function EditReview() {
   const { books, setBooks } = useContext(BookContext);
   const [hover, setHover] = useState(0);
   const [errors, setErrors] = useState([]);
-  const history = useHistory();
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch(`/books/${book_id}/reviews/${id}`)
@@ -70,7 +70,7 @@ function EditReview() {
     }).then((r) => {
       if (r.ok) {
         r.json().then(onUpdateReview);
-        history.push(`/books/${book_id}`);
+        navigate(`/books/${book_id}`);
       } else {
         r.json().then(handleErrors);
       }

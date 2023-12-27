@@ -1,13 +1,13 @@
 import React, { useState, useContext } from "react";
 import { BookContext } from "../Context/BookContext";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function AddBookForm() {
   
   const { books, setBooks } = useContext(BookContext)
   const [photoFile, setPhotoFile] = useState(null);
   const [errors, setErrors] = useState([])
-  const history = useHistory()
+  const navigate = useNavigate();
 
   function onAddBook(newBook) {
     setBooks([...books, newBook]);
@@ -55,7 +55,7 @@ function AddBookForm() {
       .then((r) => {
         if (r.ok) {
           r.json().then((newBook) => onAddBook(newBook));
-          history.push("/")
+          navigate("/");
         } else {
           r.json().then((err) => setErrors(err.errors));
         }

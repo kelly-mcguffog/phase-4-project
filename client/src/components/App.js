@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Switch, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { UserContext } from "../Context/UserContext";
 import { BookContext } from "../Context/BookContext";
 import Login from "./Login";
@@ -39,38 +39,20 @@ function App() {
         <NavBar/>
         <main>
           {user ? (
-            <Switch>
-              <Route path="/profile">
-                <Profile onDeleteReview={onDeleteReview}/>
-              </Route>
-              <Route path="/books/new">
-                  <AddBookForm />
-              </Route>
-              <Route path="/books/:book_id/reviews/:id">
-                  <EditReview />
-                </Route>
-                <Route exact path="/books/:id/edit">
-                  <EditBookForm />
-                </Route>
-                <Route exact path="/books/:id">
-                  <BookDetails onDeleteReview={onDeleteReview}/>
-                </Route>
-              <Route exact path="/">
-                <Home/>
-              </Route>
-            </Switch>
+            <Routes>
+              <Route path="/profile" element={<Profile onDeleteReview={onDeleteReview}/>}/>
+              <Route path="/books/new" element={<AddBookForm />}/>
+              <Route path="/books/:book_id/reviews/:id" element={<EditReview />}/>
+              <Route exact path="/books/:id/edit" element={<EditBookForm />}/>
+              <Route exact path="/books/:id" element={<BookDetails onDeleteReview={onDeleteReview}/>}/>
+              <Route exact path="/" element={<Home/>}/>
+            </Routes>
           ) : (
-            <Switch>
-              <Route path="/signup">
-                <SignUp />
-              </Route>
-              <Route path="/login">
-                <Login />
-              </Route>
-              <Route path="/">
-                <Home />
-              </Route>
-            </Switch>
+            <Routes>
+              <Route path="/signup" element={<SignUp />}/>
+              <Route path="/login" element={<Login />}/>
+              <Route path="/" element={<Home />}/>
+            </Routes>
           )}
         </main>
     </>
