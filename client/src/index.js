@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import { BrowserRouter } from "react-router-dom";
+import { HashRouter as Router } from 'react-router-dom';
 import App from './components/App';
 import reportWebVitals from './reportWebVitals';
 import { UserProvider } from './Context/UserContext';
@@ -11,9 +11,9 @@ ReactDOM.render(
   <React.StrictMode>
     <UserProvider>
     <BookProvider>
-      <BrowserRouter>
+      <Router>
         <App />
-      </BrowserRouter>
+      </Router>
       </BookProvider>
     </UserProvider>
   </React.StrictMode>,
