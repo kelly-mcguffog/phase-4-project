@@ -3,18 +3,9 @@ import { BookContext } from "../Context/BookContext";
 import { useHistory } from "react-router-dom";
 
 function AddBookForm() {
-
-  const initialState = {
-    title: "",
-    author: "",
-    genre: "",
-    summary: "",
-    page_count: "",
-    book_image: "https://m.media-amazon.com/images/I/21-kmLZ9t0L._AC_UF1000,1000_QL80_.jpg"
-  }
-
-  const [formData, setFormData] = useState(initialState)
+  
   const { books, setBooks } = useContext(BookContext)
+  const [photoFile, setPhotoFile] = useState(null);
   const [errors, setErrors] = useState([])
   const history = useHistory()
 
@@ -22,29 +13,53 @@ function AddBookForm() {
     setBooks([...books, newBook]);
   }
 
+  const initialState = {
+    title: "",
+    author: "",
+    genre: "",
+    summary: "",
+    page_count: ""
+  }
+
+  const [formData, setFormData] = useState(initialState);
+
   function handleChange(event) {
-    setFormData({
-      ...formData,
-      [event.target.name]: event.target.value
-    });
+    if (event.target.name === "book_image") {
+      setPhotoFile(event.target.files[0]);
+    } else {
+      setFormData({
+        ...formData,
+        [event.target.name]: event.target.value,
+      });
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        [event.target.name]: null,
+      }));
+    }
   }
 
   function handleSubmit(e) {
     e.preventDefault();
-    fetch(`/books`, {
+    const data = new FormData();
+    data.append("title", formData.title);
+    data.append("author", formData.author);
+    data.append("genre", formData.genre);
+    data.append("summary", formData.summary);
+    data.append("page_count", formData.page_count);
+    data.append("book_image", photoFile);
+
+    fetch("/books", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    }).then((r) => {
-      if (r.ok) {
-        r.json().then((newBook) => onAddBook(newBook));
-        history.push("/")
-      } else {
-        r.json().then((err) => setErrors(err.errors));
-      }
-    });
+      body: data
+    })
+      .then((r) => {
+        if (r.ok) {
+          r.json().then((newBook) => onAddBook(newBook));
+          history.push("/")
+        } else {
+          r.json().then((err) => setErrors(err.errors));
+        }
+      });
   }
   return (
     <div className="form">
@@ -104,14 +119,12 @@ function AddBookForm() {
           placeholder="Page Number"
           autoComplete="off"
         />
-        <input
-          type="text"
+          <input
+          type="file"
+          id="book_image"
           name="book_image"
+          accept="image/*"
           onChange={handleChange}
-          value={formData.book_image}
-          placeholder="Enter an Image URL"
-          className="form-input"
-          autoComplete="off"
         />
         <button className="form-button" name="submit" type="submit">Submit</button>
       </form>

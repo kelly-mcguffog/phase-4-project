@@ -10,6 +10,7 @@ function BooksContainer() {
     const [filter, setFilter] = useState("All")
     const [isOn, setIsOn] = useState(false)
 
+    if(books === null) return <h1>Loading...</h1>
     
     let displayBooks = books.filter(book => book.title.toLowerCase().includes(search.toLowerCase()))
     displayBooks = displayBooks.filter(book => {
@@ -50,7 +51,6 @@ function BooksContainer() {
     function handleClick() {
         setIsOn((isOn) => !isOn);
     }
-
 
     return(
         <>

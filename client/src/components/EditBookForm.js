@@ -5,29 +5,40 @@ import { useParams, useHistory } from "react-router-dom";
 
 function EditBookForm() {
 
-  const [formData, setFormData] = useState({
-    title: '',
-    author: '',
-    genre: '',
-    summary: '',
-    page_count: '',
-    book_image: ''
-  })
-
   const { id } = useParams();
   const { user, setUser } = useContext(UserContext)
   const { books, setBooks } = useContext(BookContext)
   const [errors, setErrors] = useState([])
   const history = useHistory();
 
+  const [formData, setFormData] = useState({
+    title: "",
+    author: "",
+    genre: "",
+    summary: "",
+    page_count: "",
+    book_image: "",
+  });
+
+  const findBook = books?.find((book) => book.id === parseInt(id));
+
+
   useEffect(() => {
-    fetch(`/books/${id}`)
-      .then(res => res.json())
-      .then(setFormData)
-  }, [id])
+    if (findBook) {
+      setFormData({
+        title: findBook.title,
+        author: findBook.author,
+        genre: findBook.genre,
+        summary: findBook.summary,
+        page_count: findBook.page_count,
+        book_image: findBook.book_image,
+      });
+    }
+  }, [findBook]);
 
-  const { title, author, genre, summary, page_count, book_image } = formData
+  if(!findBook || books === null) return <h1>loading</h1>
 
+  const { title, author, genre, summary, page_count, book_image } = formData;
 
   const onUpdateBook = (updatedBook) => {
     const updatedList = books.map(book => {
@@ -50,31 +61,63 @@ function EditBookForm() {
   }
 
   const handleChangeInput = (e) => {
-    setFormData(formData => {
-      return ({
-        ...formData,
-        [e.target.name]: e.target.value
-      })
-    })
-  }
+    if (e.target.name === "book_image") {
+      const file = e.target.files[0];
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setFormData((editFormData) => ({
+          ...editFormData,
+          book_image: {
+            url: reader.result,
+            file: file,
+          },
+        }));
+      };
+      if (file) {
+        reader.readAsDataURL(file);
+      }
+    } else {
+      setFormData((editFormData) => ({
+        ...editFormData,
+        [e.target.name]: e.target.value,
+      }));
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        [e.target.name]: null,
+      }));
+    }
+  };
 
-  function handleEditSubmit(e) {
+  const handleEditSubmit = (e) => {
     e.preventDefault();
-    fetch(`/books/${id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    }).then((r) => {
+
+    const formDataToSend = new FormData();
+    if (formData.book_image.file) {
+      formDataToSend.append("book_image", formData.book_image.file);
+    }
+    formDataToSend.append("title", formData.title);
+    formDataToSend.append("author", formData.author);
+    formDataToSend.append("genre", formData.genre);
+    formDataToSend.append("summary", formData.summary);
+    formDataToSend.append("page_count", formData.page_count);
+
+  fetch(`/books/${id}`, {
+    method: "PATCH",
+    body: formDataToSend,
+  })
+    .then((r) => {
       if (r.ok) {
-        r.json().then((updatedBook) => onUpdateBook(updatedBook))
-        history.push(`/books/${id}`)
+        return r.json();
       } else {
-        r.json().then((err) => setErrors(err.errors))
+        return r.json().then((err) => Promise.reject(err.errors));
       }
     })
-  }
+    .then((updatedBook) => {
+      onUpdateBook(updatedBook)
+      history.push(`/books/${id}`)
+    })
+};
+
 
   return (
     <div className="form">
@@ -130,14 +173,14 @@ function EditBookForm() {
           className="form-input"
           autoComplete="off"
         />
-        <input
-          type="text"
-          name="book_image"
-          onChange={handleChangeInput}
-          value={book_image}
-          autoComplete="off"
-          className="form-input"
-        />
+              <input
+                type="file"
+                className="form-input"
+                name="book_image"
+                accept="image/*"
+                onChange={handleChangeInput}
+                // value={book_image}
+              />
         <button className="form-button" name="submit" type="submit">Submit</button>
       </form>
     </div>

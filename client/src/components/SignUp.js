@@ -7,42 +7,61 @@ function SignUp() {
   const history = useHistory();
   const {setUser} = useContext(UserContext)
   const [errors, setErrors] = useState([]);
+  const [photoFile, setPhotoFile] = useState(null);
 
   const initialState = {
     name:"",
     age:"",
-    profile_picture:"https://www.pngitem.com/pimgs/m/30-307416_profile-icon-png-image-free-download-searchpng-employee.png",
     username: "",
     password: "",
-    passwordConfirmation:""
-  }
+    password_confirmation:""
+  };
 
-  const [formData, setFormData] = useState(initialState)
-  
+  const [formData, setFormData] = useState(initialState);
+
   function handleChange(event) {
-    setFormData({
-      ...formData,
-      [event.target.name]: event.target.value
-    });
+    if (event.target.name === "profile_picture") {
+      setPhotoFile(event.target.files[0]);
+    } else {
+      setFormData({
+        ...formData,
+        [event.target.name]: event.target.value,
+      });
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        [event.target.name]: null,
+      }));
+    }
   }
 
   function handleSubmit(e) {
     e.preventDefault();
+    const data = new FormData();
+    data.append("name", formData.name);
+    data.append("age", formData.age);
+    data.append("username", formData.username);
+    data.append("password", formData.password);
+    data.append("password_confirmation", formData.password_confirmation);
+    // data.append("profile_picture", photoFile);
+
+    if (photoFile !== null) {
+      data.append("profile_picture", photoFile);
+    }
+
     fetch("/signup", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    }).then((r) => {
-      if (r.ok) {
-        r.json().then((user) => setUser(user));
-        history.push("/");
-      }else{
-        r.json().then((err) => setErrors(err.errors));
-      }
-    });
+      body: data
+    })
+      .then((r) => {
+        if (r.ok) {
+          r.json().then((user) => setUser(user));
+          history.push("/");
+        } else {
+          r.json().then((err) => setErrors(err.errors));
+        }
+      });
   }
+
   return (
     <div className="form">
       <form className="login-form" onSubmit={handleSubmit}>
@@ -73,13 +92,11 @@ function SignUp() {
           value={formData.age}
           onChange={handleChange}
         />
-        <input
-          type="text"
+          <input
+          type="file"
           id="profile_picture"
           name="profile_picture"
-          placeholder="avatar"
-          autoComplete="off"
-          value={formData.profile_picture}
+          accept="image/*"
           onChange={handleChange}
         />
         <input
@@ -103,9 +120,9 @@ function SignUp() {
         <input
           type="password"
           id="password_confirmation"
-          name="passwordConfirmation"
+          name="password_confirmation"
           placeholder="password confirmation"
-          value={formData.passwordConfirmation}
+          value={formData.password_confirmation}
           onChange={handleChange}
           autoComplete="current-password"
         />
