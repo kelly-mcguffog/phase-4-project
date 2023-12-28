@@ -1,7 +1,7 @@
 class UserSerializer < ActiveModel::Serializer
 include Rails.application.routes.url_helpers
   attributes :id, :name, :username, :age, :profile_picture
-  has_many :reviews
+  has_many :reviews, serializer: ReviewSerializer 
 
   def profile_picture
     if object.profile_picture.attached?

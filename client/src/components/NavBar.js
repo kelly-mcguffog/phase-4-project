@@ -1,15 +1,17 @@
 import React, {useContext, useState} from "react";
 import { UserContext } from "../Context/UserContext";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 
 function NavBar() {
     const {user, setUser} = useContext(UserContext)
     const [isMobile, setIsMobile] = useState(false);
+    const navigate = useNavigate()
 
     function handleLogoutClick() {
         fetch("/logout", { method: "DELETE" }).then((r) => {
             if (r.ok) {
                 setUser(null);
+                navigate("/login");
             }
         });
     }

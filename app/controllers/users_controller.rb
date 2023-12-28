@@ -3,12 +3,12 @@ class UsersController < ApplicationController
     def create
         new_user = User.create!(user_params)
         session[:user_id] ||= new_user.id
-        render json: new_user, status: :created
+        render json: new_user, serializer: UserSerializer, status: :created
     end
 
     def show
         user = User.find(session[:user_id])
-        render json: user, include: ["reviews", "reviews.book"], status: :ok
+        render json: user, serializer: UserSerializer, include: ["reviews", "reviews.book"], status: :ok
     end
 
     private
