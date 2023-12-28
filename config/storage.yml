@@ -13,7 +13,6 @@ amazon:
   secret_access_key:  <%= Rails.application.credentials.dig(:aws, :secret_access_key) %>
   bucket: "book-club-app"
   region: us-east-1
-  prefix: images/books
 
 # Use rails credentials:edit to set the AWS secrets (as aws:access_key_id|secret_access_key)
 # amazon:
