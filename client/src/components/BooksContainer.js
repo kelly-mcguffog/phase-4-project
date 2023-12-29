@@ -34,11 +34,6 @@ function BooksContainer() {
             return (average_rating === 1)
         }
     })
-
-    // displayBooks.filter(book => {
-    //     if(filter === "All") return true;
-    //     return (book.average_rating === filter)
-    // })
     
     displayBooks.sort(function(a, b) {
         if(a.title.toLowerCase() < b.title.toLowerCase()) return -1;
@@ -57,7 +52,9 @@ function BooksContainer() {
     return(
         <>
             <div className="menu">
+                <div id="search-books">
                 <Search search={search} setSearch={setSearch} handleFilter={handleFilter}/>
+                </div>
                 <label className="switch">
                     <input onClick={handleClick} type="checkbox"/>
                     <span className="slider round"></span>
