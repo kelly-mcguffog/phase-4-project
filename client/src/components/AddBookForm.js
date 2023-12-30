@@ -1,17 +1,12 @@
-import React, { useState, useContext } from "react";
-import { BookContext } from "../Context/BookContext";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { BookContext } from "../Context/BookContext";
 
 function AddBookForm() {
-  
-  const { books, setBooks } = useContext(BookContext)
-  const [photoFile, setPhotoFile] = useState(null);
-  const [errors, setErrors] = useState([])
   const navigate = useNavigate();
-
-  function onAddBook(newBook) {
-    setBooks([...books, newBook]);
-  }
+  const { books, setBooks } = useContext(BookContext)
+  const [errors, setErrors] = useState([]);
+  const [photoFile, setPhotoFile] = useState(null);
 
   const initialState = {
     title: "",
@@ -19,9 +14,13 @@ function AddBookForm() {
     genre: "",
     summary: "",
     page_count: ""
-  }
+  };
 
   const [formData, setFormData] = useState(initialState);
+
+  function onAddBook(newBook) {
+    setBooks([...books, newBook]);
+  }
 
   function handleChange(event) {
     if (event.target.name === "book_image") {
@@ -46,7 +45,10 @@ function AddBookForm() {
     data.append("genre", formData.genre);
     data.append("summary", formData.summary);
     data.append("page_count", formData.page_count);
-    data.append("book_image", photoFile);
+
+    if (photoFile !== null) {
+      data.append("book_image", photoFile);
+    }
 
     fetch("/books", {
       method: "POST",
@@ -54,17 +56,18 @@ function AddBookForm() {
     })
       .then((r) => {
         if (r.ok) {
-          r.json().then((newBook) => onAddBook(newBook));
+          r.json().then((book) => onAddBook(book));
           navigate("/");
         } else {
-          r.json().then((err) => setErrors(err.errors));
+          r.json().then((err) => setErrors(err.errors || []));
         }
       });
   }
+
   return (
     <div className="form">
-      <form onSubmit={handleSubmit}>
-        <h1 className="form-text">Add to Our Collection</h1>
+      <form className="login-form" onSubmit={handleSubmit}>
+        <h1 className="form-text head">Add to Our Collection</h1>
         {errors.length > 0 && (
           <ul className="error-message">
             {errors.map((err) => (
@@ -74,25 +77,26 @@ function AddBookForm() {
         )}
         <input
           type="text"
+          id="title"
           name="title"
-          onChange={handleChange}
-          value={formData.title}
-          className="form-input"
-          placeholder="Title"
           autoComplete="off"
+          placeholder="title"
+          value={formData.title}
+          onChange={handleChange}
         />
         <input
           type="text"
+          id="author"
           name="author"
-          onChange={handleChange}
-          value={formData.author}
-          className="form-input"
           placeholder="author"
           autoComplete="off"
+          value={formData.author}
+          onChange={handleChange}
         />
+
         <select className="form-input" name="genre" value={formData.genre} onChange={handleChange}>
-          <option value="Action & Adventure">Action & Adventure</option>
           <option value="Mystery">Mystery</option>
+          <option value="Action & Adventure">Action & Adventure</option>
           <option value="Thriller">Thriller</option>
           <option value="Historical Fiction">Historical Fiction</option>
           <option value="Horror">Horror</option>
@@ -107,26 +111,24 @@ function AddBookForm() {
           value={formData.summary}
           className="form-textarea"
           placeholder="summary"
-          autoComplete="off"
         >
         </textarea>
         <input
           type="text"
+          id="page_count"
           name="page_count"
-          onChange={handleChange}
+          placeholder="page count"
           value={formData.page_count}
-          className="form-input"
-          placeholder="Page Number"
-          autoComplete="off"
+          onChange={handleChange}
         />
-          <input
+        <input
           type="file"
           id="book_image"
           name="book_image"
           accept="image/*"
           onChange={handleChange}
         />
-        <button className="form-button" name="submit" type="submit">Submit</button>
+        <button className="form-button" type="submit">Submit</button>
       </form>
     </div>
   );

@@ -276,7 +276,7 @@ textarea{
   height: 100px;
 }
 
-#book_image{
+#book_image, #profile_picture{
   background-color: transparent;
   border: none;
 }

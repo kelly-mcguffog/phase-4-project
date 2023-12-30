@@ -1,15 +1,16 @@
-import { useContext} from "react";
+import { useContext } from "react";
 import { useParams } from "react-router-dom";
 import ReviewContainer from "./ReviewContainer";
-import { BookContext } from "../Context/BookContext"; 
+import { BookContext } from "../Context/BookContext";
 import BookDetailsContent from "./BookDetailsContent";
 
 
-function BookDetails({onDeleteReview}) {
+function BookDetails({ onDeleteReview }) {
   const { id } = useParams();
   const { books } = useContext(BookContext);
 
-  const book = books.find((book) => book.id === parseInt(id));
+  const book = books?.find((book) => book.id === parseInt(id));
+
   if (!book) {
     return <h1>Not Found</h1>;
   }

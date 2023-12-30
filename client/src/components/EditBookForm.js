@@ -36,9 +36,9 @@ function EditBookForm() {
     }
   }, [findBook]);
 
-  if(!findBook || books === null) return <h1>loading</h1>
+  if (!findBook || books === null) return <h1>loading</h1>
 
-  const { title, author, genre, summary, page_count, book_image } = formData;
+  const { title, author, genre, summary, page_count } = formData;
 
   const onUpdateBook = (updatedBook) => {
     const updatedList = books.map(book => {
@@ -101,24 +101,19 @@ function EditBookForm() {
     formDataToSend.append("summary", formData.summary);
     formDataToSend.append("page_count", formData.page_count);
 
-  fetch(`/books/${id}`, {
-    method: "PATCH",
-    body: formDataToSend,
-  })
-    .then((r) => {
-      if (r.ok) {
-        return r.json();
-      } else {
-        return r.json().then((err) => Promise.reject(err.errors));
-      }
+    fetch(`/books/${id}`, {
+      method: "PATCH",
+      body: formDataToSend,
     })
-    .then((updatedBook) => {
-      onUpdateBook(updatedBook)
-      navigate(`/books/${id}`)
-    })
-};
-
-
+      .then((r) => {
+        if (r.ok) {
+          r.json().then((book) => onUpdateBook(book));
+          navigate(`/books/${id}`)
+        } else {
+          r.json().then((err) => setErrors(err.errors || []));
+        }
+      });
+  };
   return (
     <div className="form">
       <form onSubmit={handleEditSubmit}>
@@ -173,14 +168,13 @@ function EditBookForm() {
           className="form-input"
           autoComplete="off"
         />
-              <input
-                type="file"
-                className="form-input"
-                name="book_image"
-                accept="image/*"
-                onChange={handleChangeInput}
-                // value={book_image}
-              />
+        <input
+          type="file"
+          className="form-input"
+          name="book_image"
+          accept="image/*"
+          onChange={handleChangeInput}
+        />
         <button className="form-button" name="submit" type="submit">Submit</button>
       </form>
     </div>

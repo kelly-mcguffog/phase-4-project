@@ -6,10 +6,6 @@ class BooksController < ApplicationController
         render json: books, each_serializer: BookSerializer, include: ["reviews", "reviews.user"], status: :ok
     end
 
-    def show
-        render json: find_book, each_serializer: BookSerializer, status: :ok
-    end
-
     def update
         @book.update!(book_params)
         render json: @book, each_serializer: BookSerializer, include: ["reviews", "reviews.user"], status: :ok
@@ -28,7 +24,7 @@ class BooksController < ApplicationController
     private
 
     def book_params
-        params.require(:book).permit(:title, :genre, :author, :summary, :page_count, :book_image)
+        params.permit(:title, :genre, :author, :summary, :page_count, :book_image)
     end
 
     def find_book

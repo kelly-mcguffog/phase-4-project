@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 function Login() {
   const navigate = useNavigate();
-  const {setUser} = useContext(UserContext)
+  const { setUser } = useContext(UserContext)
   const [errors, setErrors] = useState([])
 
   const initialState = {
@@ -14,7 +14,7 @@ function Login() {
   }
 
   const [formData, setFormData] = useState(initialState)
-  
+
   function handleChange(event) {
     setFormData({
       ...formData,
@@ -34,7 +34,7 @@ function Login() {
       if (r.ok) {
         r.json().then((user) => setUser(user));
         navigate("/");
-      }else{
+      } else {
         r.json().then((err) => setErrors(err.error));
       }
     });

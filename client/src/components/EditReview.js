@@ -4,11 +4,6 @@ import { UserContext } from "../Context/UserContext";
 import { BookContext } from "../Context/BookContext";
 
 function EditReview() {
-  const [formData, setFormData] = useState({
-    comment: "",
-    rating: "",
-  });
-
   const { book_id, id } = useParams();
   const { user, setUser } = useContext(UserContext);
   const { books, setBooks } = useContext(BookContext);
@@ -16,47 +11,50 @@ function EditReview() {
   const [errors, setErrors] = useState([]);
   const navigate = useNavigate();
 
+  const [formData, setFormData] = useState({
+    comment: "",
+    rating: "",
+  });
+
+  const findBook = books?.find((book) => book.id === parseInt(book_id));
+  const findReview = findBook?.reviews?.find((review) => review.id === parseInt(id));
+
   useEffect(() => {
-    fetch(`/books/${book_id}/reviews/${id}`)
-      .then((res) => res.json())
-      .then((data) => setFormData(data));
-  }, [book_id, id]);
+    if (findReview && findBook) {
+      setFormData({
+        comment: findReview.comment,
+        rating: findReview.rating,
+      });
+    }
+  }, [findReview, findBook]);
 
   const { comment, rating } = formData;
 
   const handleChangeInput = (e) => {
     setFormData((formData) => ({
       ...formData,
-      [e.target.name]: e.target.value,
+      [e.target.name]: e.target.value
     }));
   };
 
-  const updateArrayObject = (array, objectId, updatedObject) =>
-    array.map((item) => (item.id === objectId ? updatedObject : item));
-
-  const onUpdateReview = () => {
-    const book = books.find((book) => book.id === parseInt(book_id));
-    const bookReviews = updateArrayObject(
-      book.reviews,
-      formData.id,
-      formData
+  const onUpdateReview = (updatedReview) => {
+    setUser(() => {
+      const updatedReviews = user.reviews.map((review) =>
+        review.id === updatedReview.id ? updatedReview : review
+      );
+      return { ...user, reviews: updatedReviews };
+    });
+  
+    const updatedBookReviews = findBook.reviews.map((review) =>
+      review.id === updatedReview.id ? updatedReview : review
+    );
+  
+    const updatedBooks = books.map((book) =>
+      book.id === updatedReview.book_id ? { ...book, reviews: updatedBookReviews } : book
     );
 
-    const updatedBook = { ...book, reviews: bookReviews };
-    const updatedBookList = updateArrayObject(
-      books,
-      formData.book_id,
-      updatedBook
-    );
-
-    setBooks(updatedBookList);
-
-    const updateUserReview = updateArrayObject(
-      user.reviews,
-      formData.id,
-      formData
-    );
-    setUser({ ...user, reviews: updateUserReview });
+    setBooks(updatedBooks)
+  
   };
 
   const handleEditSubmit = (e) => {
@@ -66,31 +64,25 @@ function EditReview() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(formData),
+      body: JSON.stringify(formData)
     }).then((r) => {
-      if (r.ok) {
-        r.json().then(onUpdateReview);
-        navigate(`/books/${book_id}`);
-      } else {
-        r.json().then(handleErrors);
-      }
-    });
-  };
-
-  const handleErrors = (err) => {
-    setErrors(err.errors);
-  };
+    if (r.ok) {
+      r.json().then((updatedReview) => onUpdateReview(updatedReview));
+      navigate(`/books/${book_id}`);
+    } else {
+      r.json().then((err) => setErrors(err.errors));
+    }
+  });
+}
 
   return (
     <div className="form">
       <form onSubmit={handleEditSubmit}>
         <h1 className="form-text">Edit Review</h1>
         {errors.length > 0 && (
-          <ul className="error-message">
-            {errors.map((err) => (
-              <li key={err}>{err}</li>
-            ))}
-          </ul>
+          <p className="error-message">
+            {errors}
+          </p>
         )}
         <textarea
           type="text"
@@ -118,7 +110,6 @@ function EditReview() {
               </button>
             );
           })}
-
         </div>
         <button className="form-button" name="submit" type="submit">
           Submit

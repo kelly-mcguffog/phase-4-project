@@ -1,12 +1,12 @@
 import React from "react";
 import ReviewButtons from "./ReviewButtons";
 
-function Review({review, onDeleteReview}) {
+function Review({ review, onDeleteReview }) {
 
-    const {comment, rating, user} = review;
-    const {name, profile_picture} = user;
+    const { comment, rating, user } = review;
+    const { name, profile_picture } = user;
 
-    return(
+    return (
         <div className="review details">
             <div className="image-cropper">
                 <img className="profile-image" src={profile_picture} alt={name}></img>
@@ -17,7 +17,7 @@ function Review({review, onDeleteReview}) {
                 <h5 className="title"><strong>{name}</strong></h5>
             </div>
             <div className="review-menu">
-                <ReviewButtons onDeleteReview={onDeleteReview} review={review}/>
+                <ReviewButtons onDeleteReview={onDeleteReview} review={review} />
             </div>
         </div>
     )

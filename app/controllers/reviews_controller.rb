@@ -1,10 +1,5 @@
 class ReviewsController < ApplicationController
-    # before_action :user_review, only: [:update, :destroy]
     before_action :authorized, only: [:create, :update, :destroy]
-
-    def show
-        render json: user_review, status: :ok
-    end
 
     def create
         current_user = User.find(session[:user_id])
@@ -13,8 +8,8 @@ class ReviewsController < ApplicationController
     end
 
     def update
-        review = user_review.update!(review_params)
-        render json: review, status: :ok
+        user_review.update!(review_params)
+        render json: user_review, status: :ok
     end
 
     def destroy
@@ -25,7 +20,8 @@ class ReviewsController < ApplicationController
     private
 
     def review_params
-        params.permit(:comment, :rating, :book_id)
+        params.require(:review).permit(:comment, :rating, :book_id, :id)
+
     end
 
     def user_review

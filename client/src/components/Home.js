@@ -1,23 +1,23 @@
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 import { UserContext } from "../Context/UserContext";
 import BooksContainer from "./BooksContainer";
 import Login from "./Login";
 
 function Home() {
-  const {user} = useContext(UserContext)
+  const { user } = useContext(UserContext)
 
   if (user) {
-    return(
+    return (
       <>
         <h1 className="welcome-text">BookClub</h1>
-        <BooksContainer/>
+        <BooksContainer />
       </>
     )
   } else {
     return (
-      <Login/>
+      <Login />
     )
   }
 }
-  
+
 export default Home;

@@ -13,48 +13,48 @@ import AddBookForm from "./AddBookForm";
 import EditBookForm from "./EditBookForm";
 
 function App() {
-  
-  const {user,setUser} = useContext(UserContext)
-  
-  const {books, setBooks} = useContext(BookContext)
+
+  const { user, setUser } = useContext(UserContext)
+
+  const { books, setBooks } = useContext(BookContext)
 
   function onDeleteReview(selectedReview) {
     const updatedBooks = books.map(book => {
       const match = [...book.reviews].filter(review => review.id !== selectedReview.id)
 
-      if(book.id === selectedReview.book_id){
-        return {...book, reviews: match}
-      }else{
+      if (book.id === selectedReview.book_id) {
+        return { ...book, reviews: match }
+      } else {
         return book
-      }      
+      }
     })
     setBooks(updatedBooks)
 
     const updatedUserReviews = user.reviews.filter(review => review.id !== selectedReview.id)
-    setUser({...user, reviews: updatedUserReviews})
+    setUser({ ...user, reviews: updatedUserReviews })
   }
 
   return (
     <>
-        <NavBar/>
-        <main>
-          {user ? (
-            <Routes>
-              <Route path="/profile" element={<Profile onDeleteReview={onDeleteReview}/>}/>
-              <Route path="/books/new" element={<AddBookForm />}/>
-              <Route path="/books/:book_id/reviews/:id" element={<EditReview />}/>
-              <Route exact path="/books/:id/edit" element={<EditBookForm />}/>
-              <Route exact path="/books/:id" element={<BookDetails onDeleteReview={onDeleteReview}/>}/>
-              <Route exact path="/" element={<Home/>}/>
-            </Routes>
-          ) : (
-            <Routes>
-              <Route path="/signup" element={<SignUp />}/>
-              <Route path="/login" element={<Login />}/>
-              <Route path="/" element={<Home />}/>
-            </Routes>
-          )}
-        </main>
+      <NavBar />
+      <main>
+        {user ? (
+          <Routes>
+            <Route path="/profile" element={<Profile onDeleteReview={onDeleteReview} />} />
+            <Route path="/books/new" element={<AddBookForm />} />
+            <Route path="/books/:book_id/reviews/:id/edit" element={<EditReview />} />
+            <Route exact path="/books/:id/edit" element={<EditBookForm />} />
+            <Route exact path="/books/:id" element={<BookDetails onDeleteReview={onDeleteReview} />} />
+            <Route exact path="/" element={<Home />} />
+          </Routes>
+        ) : (
+          <Routes>
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/" element={<Home />} />
+          </Routes>
+        )}
+      </main>
     </>
   );
 }
