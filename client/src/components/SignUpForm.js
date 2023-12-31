@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { UserContext } from "../Context/UserContext";
 import { Link } from "react-router-dom";
 
-function SignUp() {
+function SignUpForm() {
   const navigate = useNavigate();
   const { setUser } = useContext(UserContext)
   const [errors, setErrors] = useState([]);
@@ -133,4 +133,4 @@ function SignUp() {
   );
 }
 
-export default SignUp;
+export default SignUpForm;

@@ -12,6 +12,7 @@ function MyBookReview({ review, onDeleteReview }) {
       <Link to={`/books/${book_id}`}>
         <img className="review-image" src={book_image} alt={title} />
       </Link>
+      <div className="review-details">
       <div className="details-text">
         <h3 className="comment">{comment}</h3>
         <p className="star">{"★".repeat(rating)}</p>
@@ -25,6 +26,7 @@ function MyBookReview({ review, onDeleteReview }) {
       <div className="review-menu">
         <ReviewButtons onDeleteReview={onDeleteReview} review={review} />
       </div>
+    </div>
     </div>
   )
 }

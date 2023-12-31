@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import { UserContext } from "../Context/UserContext";
 import { BookContext } from "../Context/BookContext";
 import Login from "./Login";
-import SignUp from "./SignUp";
+import SignUpForm from "./SignUpForm";
 import NavBar from "./NavBar";
 import Home from "./Home";
 import BookDetails from "./BookDetails";
@@ -49,7 +49,7 @@ function App() {
           </Routes>
         ) : (
           <Routes>
-            <Route path="/signup" element={<SignUp />} />
+            <Route path="/signup" element={<SignUpForm />} />
             <Route path="/login" element={<Login />} />
             <Route path="/" element={<Home />} />
           </Routes>

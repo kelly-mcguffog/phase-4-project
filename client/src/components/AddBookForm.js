@@ -11,7 +11,7 @@ function AddBookForm() {
   const initialState = {
     title: "",
     author: "",
-    genre: "",
+    genre: "Mystery",
     summary: "",
     page_count: ""
   };

@@ -11,6 +11,7 @@ function Review({ review, onDeleteReview }) {
             <div className="image-cropper">
                 <img className="profile-image" src={profile_picture} alt={name}></img>
             </div>
+            <div className="review-details">
             <div className="details-text">
                 <h3 className="comment">{comment}</h3>
                 <p className="star">{"★ ".repeat(rating)}</p>
@@ -18,6 +19,7 @@ function Review({ review, onDeleteReview }) {
             </div>
             <div className="review-menu">
                 <ReviewButtons onDeleteReview={onDeleteReview} review={review} />
+            </div>
             </div>
         </div>
     )
