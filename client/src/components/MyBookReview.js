@@ -9,9 +9,11 @@ function MyBookReview({ review, onDeleteReview }) {
 
   return (
     <div className="review details" key={id}>
+      <div className="books">
       <Link to={`/books/${book_id}`}>
         <img className="review-image" src={book_image} alt={title} />
       </Link>
+      </div>
       <div className="review-details">
       <div className="details-text">
         <h3 className="comment">{comment}</h3>

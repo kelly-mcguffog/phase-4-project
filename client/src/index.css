@@ -25,7 +25,6 @@ code {
 
 #search-books{
   display: flex;
-  /* align-items: center; */
   width: 100%;
 }
 
@@ -516,7 +515,6 @@ input:checked + .slider:before {
 }
 
 .input-search{
-  /* padding: 15px; */
   border-radius: 0px 5px 5px 0px;
   background: transparent;
   border: 1px solid #013220;
@@ -524,9 +522,6 @@ input:checked + .slider:before {
 }
 
 .filter{
-  /* width: 120px; */
-  /* font-size: 12px; */
-  /* padding: 15px; */
   border-radius: 5px 0px 0px 5px;
   border: 1px solid #013220;
   border-right: 0px;
